@@ -1,130 +1,245 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Business Model Canvas Studio</title>
-<meta name="description" content="Design, validate, and collaborate on business models in real time." />
+<title>Activity Boards · Business Innovation with Agentic AI and AI Agents</title>
+<meta name="description" content="Online activity boards for the WSQ course Business Innovation with Agentic AI and AI Agents (TGS-2023037472). No login: type your answers, screenshot the board, paste it into your Practical Performance." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2321201C'/%3E%3Crect x='6' y='7' width='9' height='8' rx='1.5' fill='%23D97757'/%3E%3Crect x='17' y='7' width='9' height='8' rx='1.5' fill='%23FAF9F5'/%3E%3Crect x='6' y='17' width='9' height='8' rx='1.5' fill='%23FAF9F5'/%3E%3Crect x='17' y='17' width='9' height='8' rx='1.5' fill='%233A7D7B'/%3E%3C/svg%3E" />
 <link rel="stylesheet" href="css/styles.css" />
 <link rel="preconnect" href="https://www.gstatic.com" />
 <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
 </head>
 <body>
 
-<!-- ============ LANDING ============ -->
-<section id="landing" class="page">
-  <header class="top-bar">
-    <div class="brand">
-      <div class="brand-mark" aria-hidden="true"></div>
-      <span class="brand-text">BMC Studio</span>
-    </div>
-    <button id="theme-toggle-landing" class="icon-btn" aria-label="Toggle theme">
-      <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-      <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+<!-- ================= LANDING ================= -->
+<div id="landing" class="shell">
+  <aside class="side">
+    <div class="side-kicker">TGS-2023037472 · Activity boards</div>
+    <div class="side-course">Business Innovation with Agentic AI and AI Agents</div>
+
+    <div class="keybox" data-keybox></div>
+
+    <nav class="side-nav" aria-label="Activities">
+      <h4>Start</h4>
+      <a href="./" class="on">All activities</a>
+      <h4>Class activities</h4>
+      <div id="side-activities"></div>
+      <h4>More</h4>
+      <a href="?activity=bmc#start">Classic Business Model Canvas</a>
+      <a href="#join">Join a board by ID</a>
+    </nav>
+
+    <button class="theme-btn" data-theme-toggle type="button">
+      <span class="when-light">Dark theme</span><span class="when-dark">Light theme</span>
     </button>
+  </aside>
+
+  <main class="main">
+    <div class="kicker">TGS-2023037472 · Tertiary Infotech Academy</div>
+    <h1 id="landing-h1">One board per learning outcome, one screenshot per PP task</h1>
+    <p class="lead">Open a board, type your answers straight into each block, then screenshot the finished board into your Practical Performance. No login: just your name. Classmates join the same board from a QR code and edit with you live.</p>
+
+    <div class="callout">
+      <strong>Stuck on a blank block?</strong> Press <b>View example</b> on any board to see how <b>Meridian Services Pte Ltd</b>, a fictional Singapore facilities firm, filled it in.
+    </div>
+
+    <h2>Pick your activity</h2>
+    <div id="activity-cards" class="act-grid"></div>
+
+    <div class="start-row">
+      <section id="start" class="panel start-panel">
+        <div class="kicker">New board</div>
+        <h3>Start your board</h3>
+        <label class="field">
+          <span>Activity</span>
+          <select id="create-type"></select>
+        </label>
+        <label class="field">
+          <span>Your name</span>
+          <input id="create-name" type="text" placeholder="e.g. Tan Wei Ling" autocomplete="name" maxlength="60" />
+        </label>
+        <label class="field">
+          <span>Organisation (your board title)</span>
+          <input id="create-org" type="text" placeholder="e.g. your company, or Meridian Services Pte Ltd" maxlength="80" />
+        </label>
+        <button id="btn-create" class="btn btn-primary btn-block" type="button">Create board</button>
+      </section>
+
+      <section id="join" class="panel">
+        <div class="kicker teal">Already started?</div>
+        <h3>Join a board</h3>
+        <p class="caption">Paste the Board ID your trainer or teammate shared, or scan their QR code.</p>
+        <label class="field">
+          <span>Your name</span>
+          <input id="join-name" type="text" placeholder="e.g. Tan Wei Ling" autocomplete="name" maxlength="60" />
+        </label>
+        <label class="field">
+          <span>Board ID</span>
+          <input id="join-id" type="text" placeholder="e.g. bright-otter-1234" autocomplete="off" />
+        </label>
+        <button id="btn-join" class="btn btn-ink btn-block" type="button">Join board</button>
+      </section>
+    </div>
+
+    <h2>Where each screenshot goes</h2>
+    <div class="table-wrap">
+      <table class="map-table">
+        <thead><tr><th>Activity</th><th>Board</th><th>Paste the screenshot into</th><th>LO · K&amp;A</th></tr></thead>
+        <tbody id="map-rows"></tbody>
+      </table>
+    </div>
+
+    <div id="config-warning" class="callout callout-rose" hidden>
+      <strong>Firebase not configured.</strong> Edit <code>js/firebase.js</code> to enable real-time boards.
+    </div>
+
+    <footer class="foot">
+      <span>Powered by <a href="https://www.tertiarycourses.com.sg/" target="_blank" rel="noopener noreferrer">Tertiary Infotech Academy Pte Ltd</a></span>
+      <span class="sep">·</span>
+      <span>Meridian Services and the simulator's sample businesses are fictional.</span>
+    </footer>
+  </main>
+</div>
+
+<!-- ================= BOARD ================= -->
+<div id="workspace" class="board-page" hidden>
+  <header class="board-bar">
+    <a href="./" id="btn-leave" class="bar-back" title="Back to all activities">&larr; All activities</a>
+    <span class="bar-kicker">TGS-2023037472 · Activity boards</span>
+    <div class="bar-right">
+      <div id="presence" class="presence" aria-label="People on this board"></div>
+      <button class="icon-btn" data-theme-toggle type="button" aria-label="Toggle dark theme" title="Toggle dark theme">
+        <svg class="when-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="when-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
   </header>
 
-  <main class="hero">
-    <div class="hero-inner">
-      <h1 class="hero-title">Business Model Canvas <span class="accent">Studio</span></h1>
-      <p class="hero-tagline">Design, validate, and collaborate on business models in real time.</p>
-
-      <div class="cards">
-        <div class="card">
-          <h2>Create New Canvas</h2>
-          <p class="muted">Start a fresh canvas and invite your team.</p>
-          <label class="field">
-            <span>Your name</span>
-            <input id="create-name" type="text" placeholder="Jane Doe" autocomplete="name" />
-          </label>
-          <label class="field">
-            <span>Canvas title <em class="optional">(optional)</em></span>
-            <input id="create-title" type="text" placeholder="Acme business model" />
-          </label>
-          <button id="btn-create" class="btn btn-primary">Create Canvas</button>
-        </div>
-
-        <div class="card">
-          <h2>Join Canvas</h2>
-          <p class="muted">Got a Canvas ID or invite link? Hop in.</p>
-          <label class="field">
-            <span>Your name</span>
-            <input id="join-name" type="text" placeholder="Jane Doe" autocomplete="name" />
-          </label>
-          <label class="field">
-            <span>Canvas ID</span>
-            <input id="join-id" type="text" placeholder="e.g. bright-otter-1234" autocomplete="off" />
-          </label>
-          <button id="btn-join" class="btn btn-secondary">Join Canvas</button>
-        </div>
+  <section class="board-intro">
+    <div class="intro-main">
+      <div id="board-kicker" class="kicker"></div>
+      <h1 id="board-title"></h1>
+      <div class="org-row">
+        <label for="board-org" class="org-label">Organisation</label>
+        <input id="board-org" class="org-input" type="text" maxlength="80" aria-label="Organisation (board title)" />
       </div>
-
-      <div id="config-warning" class="config-warning" hidden>
-        <strong>Firebase not configured.</strong> Edit <code>js/firebase.js</code> with your Firebase project credentials to enable real-time collaboration.
+      <p id="board-pitch" class="lead"></p>
+      <div id="retired-note" class="callout callout-rose" hidden>
+        <strong>This activity has been retired from the course.</strong> Your notes are kept and you can still edit, screenshot and download this board, but it is no longer part of the Practical Performance.
+      </div>
+      <div class="chips">
+        <span id="chip-evidence" class="chip chip-teal"></span>
+        <span id="chip-learners" class="chip"></span>
+        <span id="chip-id" class="chip chip-mono"></span>
       </div>
     </div>
-  </main>
+    <details id="discuss" class="discuss">
+      <summary>Discuss before you write</summary>
+      <ol id="discuss-list"></ol>
+    </details>
+  </section>
 
-  <footer class="footer">
-    <span>Built with HTML, CSS, JS &middot; Firebase &middot; QRCode.js</span>
-    <span class="footer-sep">&middot;</span>
+  <div class="toolbar" role="toolbar" aria-label="Board tools">
+    <button id="btn-view-example" class="btn" type="button" aria-pressed="false">View example</button>
+    <button id="btn-load-example" class="btn" type="button">Load worked example</button>
+    <button id="btn-shot" class="btn" type="button">Screenshot view</button>
+    <span class="toolbar-gap"></span>
+    <button id="btn-sim" class="btn btn-primary" type="button">Simulate with AI</button>
+    <button id="btn-share" class="btn btn-ink" type="button">Share</button>
+  </div>
+
+  <div id="capture" class="capture">
+    <div id="shot-strip" class="shot-strip" hidden>
+      <div class="shot-course">Business Innovation with Agentic AI and AI Agents · TGS-2023037472</div>
+      <div class="shot-title" id="shot-title"></div>
+      <div class="shot-meta" id="shot-meta"></div>
+    </div>
+    <main id="board" class="board" aria-label="Activity board"></main>
+  </div>
+
+  <footer class="foot board-foot">
     <span>Powered by <a href="https://www.tertiarycourses.com.sg/" target="_blank" rel="noopener noreferrer">Tertiary Infotech Academy Pte Ltd</a></span>
   </footer>
-</section>
+</div>
 
-<!-- ============ WORKSPACE ============ -->
-<section id="workspace" class="page" hidden>
-  <header class="top-bar workspace-bar">
-    <div class="brand brand-compact">
-      <div class="brand-mark" aria-hidden="true"></div>
-      <input id="canvas-title" class="title-input" type="text" aria-label="Canvas title" />
-    </div>
-    <div class="bar-actions">
-      <div id="presence" class="presence" aria-label="Active collaborators"></div>
-      <button id="btn-share" class="btn btn-primary btn-sm">Share</button>
-      <button id="theme-toggle-workspace" class="icon-btn" aria-label="Toggle theme">
-        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+<!-- Screenshot-view controls (outside #capture, so never in the image) -->
+<div id="shot-bar" class="shot-bar" hidden>
+  <span class="shot-bar-text">Screenshot view</span>
+  <button id="btn-png" class="btn btn-primary btn-sm" type="button">Download PNG</button>
+  <button id="btn-pdf" class="btn btn-primary btn-sm" type="button">Download PDF</button>
+  <button id="btn-print" class="btn btn-sm" type="button">Print</button>
+  <button id="btn-shot-exit" class="btn btn-ink btn-sm" type="button">Exit</button>
+</div>
+
+<!-- ================= AI SIMULATOR DRAWER ================= -->
+<div id="sim" class="drawer" hidden>
+  <div class="drawer-backdrop" data-close-sim></div>
+  <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="sim-h">
+    <header class="drawer-head">
+      <div>
+        <div class="kicker">Optional · your own API key</div>
+        <h3 id="sim-h">Simulate with AI</h3>
+      </div>
+      <button class="icon-btn" data-close-sim type="button" aria-label="Close simulator">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <button id="btn-leave" class="icon-btn" aria-label="Leave canvas" title="Leave">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      </button>
+    </header>
+    <div class="drawer-body">
+      <div class="keybox" data-keybox></div>
+
+      <label class="field">
+        <span>Sample business</span>
+        <select id="sim-business"></select>
+      </label>
+      <div id="sim-profile" class="biz-card"></div>
+
+      <div class="sim-actions">
+        <button class="act-btn" data-sim="dormant" type="button"></button>
+        <div class="act-suggest">
+          <label class="field field-tight">
+            <span>Block</span>
+            <select id="sim-block"></select>
+          </label>
+          <button class="act-btn" data-sim="suggest" type="button"></button>
+        </div>
+        <button class="act-btn" data-sim="simulate" type="button"></button>
+        <button class="act-btn" data-sim="stakeholders" type="button"></button>
+      </div>
+
+      <div id="sim-out" class="sim-out" aria-live="polite"></div>
     </div>
-  </header>
+  </aside>
+</div>
 
-  <main id="bmc-grid" class="bmc-grid" aria-label="Business Model Canvas">
-    <!-- blocks injected by canvas.js -->
-  </main>
-</section>
-
-<!-- ============ MODALS ============ -->
+<!-- ================= MODALS ================= -->
 <div id="share-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="share-title">
   <div class="modal-backdrop" data-close></div>
   <div class="modal-panel">
     <header class="modal-head">
-      <h3 id="share-title">Share this canvas</h3>
-      <button class="icon-btn" aria-label="Close" data-close>
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <h3 id="share-title">Bring your team onto this board</h3>
+      <button class="icon-btn" aria-label="Close" data-close type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </header>
     <div class="modal-body share-body">
       <div id="qrcode" class="qr"></div>
       <div class="share-info">
         <label class="field">
-          <span>Canvas ID</span>
+          <span>Board ID</span>
           <div class="copy-row">
             <input id="share-id" type="text" readonly />
-            <button class="btn btn-sm" data-copy="#share-id">Copy</button>
+            <button class="btn btn-sm" data-copy="#share-id" type="button">Copy</button>
           </div>
         </label>
         <label class="field">
           <span>Invite link</span>
           <div class="copy-row">
             <input id="share-url" type="text" readonly />
-            <button class="btn btn-sm" data-copy="#share-url">Copy</button>
+            <button class="btn btn-sm" data-copy="#share-url" type="button">Copy</button>
           </div>
         </label>
-        <p class="muted">Scan the QR code or share the link. Anyone with the link can join and collaborate in real time.</p>
+        <p class="caption">Anyone with the link joins with just their name and edits live.</p>
       </div>
     </div>
   </div>
@@ -134,31 +249,33 @@
   <div class="modal-backdrop" data-close></div>
   <div class="modal-panel">
     <header class="modal-head">
-      <h3 id="note-title-h">Sticky Note</h3>
-      <button class="icon-btn" aria-label="Close" data-close>
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <h3 id="note-title-h">Sticky note</h3>
+      <button class="icon-btn" aria-label="Close" data-close type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </header>
     <form id="note-form" class="modal-body">
       <input type="hidden" id="note-block" />
       <input type="hidden" id="note-id" />
+      <p id="note-block-name" class="kicker"></p>
       <label class="field">
-        <span>Title</span>
+        <span>Headline</span>
         <input id="note-title" type="text" required maxlength="80" />
       </label>
       <label class="field">
-        <span>Description</span>
+        <span>Detail</span>
         <textarea id="note-desc" rows="3" maxlength="500"></textarea>
       </label>
       <label class="field">
-        <span>Category / tag</span>
+        <span>Tag</span>
         <input id="note-category" type="text" list="category-suggestions" maxlength="30" />
         <datalist id="category-suggestions">
-          <option value="Insight"></option>
-          <option value="Hypothesis"></option>
+          <option value="Idea"></option>
           <option value="Risk"></option>
           <option value="Question"></option>
           <option value="Action"></option>
+          <option value="Example"></option>
+          <option value="AI"></option>
         </datalist>
       </label>
       <div class="row-2">
@@ -181,9 +298,27 @@
       </div>
       <div class="modal-actions">
         <button type="button" id="note-delete" class="btn btn-danger" hidden>Delete</button>
-        <div class="spacer"></div>
+        <span class="spacer"></span>
         <button type="button" class="btn" data-close>Cancel</button>
         <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="name-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="name-h">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel modal-sm">
+    <header class="modal-head"><h3 id="name-h">Who's writing?</h3></header>
+    <form id="name-form" class="modal-body">
+      <p class="caption">No login. Your name goes on the notes you write and on your screenshot.</p>
+      <label class="field">
+        <span>Your name</span>
+        <input id="name-input" type="text" required maxlength="60" autocomplete="name" />
+      </label>
+      <div class="modal-actions">
+        <span class="spacer"></span>
+        <button type="submit" class="btn btn-primary">Open the board</button>
       </div>
     </form>
   </div>

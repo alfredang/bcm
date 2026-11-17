@@ -1,36 +1,31 @@
 import { isConfigured } from "./firebase.js";
-import { initLanding } from "./landing.js";
+import { initLanding, showLandingFor } from "./landing.js";
 import { openCanvas, closeCanvas } from "./canvas.js";
+import { mountKeyboxes } from "./keybox.js";
 
-// ---- Theme ----
-const THEME_KEY = "bmc.theme";
+// ---- Theme: light (ivory) by default, dark (charcoal) on request ----
+const THEME_KEY = "bcm.theme";
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem(THEME_KEY, theme);
+  try { localStorage.setItem(THEME_KEY, theme); } catch {}
 }
-function toggleTheme() {
-  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-  applyTheme(next);
-}
-applyTheme(localStorage.getItem(THEME_KEY) || "dark");
-
-document.getElementById("theme-toggle-landing").addEventListener("click", toggleTheme);
-document.getElementById("theme-toggle-workspace").addEventListener("click", toggleTheme);
+applyTheme(localStorage.getItem(THEME_KEY) || "light");
+document.querySelectorAll("[data-theme-toggle]").forEach(b => b.addEventListener("click", () => {
+  applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+}));
 
 // ---- Modals ----
-function bindModalCloses() {
-  document.querySelectorAll(".modal").forEach(modal => {
-    modal.addEventListener("click", (e) => {
-      if (e.target.matches("[data-close]")) modal.hidden = true;
-    });
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click", (e) => {
+    if (e.target.closest("[data-close]")) modal.hidden = true;
   });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      document.querySelectorAll(".modal:not([hidden])").forEach(m => (m.hidden = true));
-    }
-  });
-}
-bindModalCloses();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  document.querySelectorAll(".modal:not([hidden])").forEach(m => { if (m.id !== "name-modal") m.hidden = true; });
+  const sim = document.getElementById("sim");
+  if (!sim.hidden) sim.hidden = true;
+});
 
 // ---- Copy buttons ----
 document.body.addEventListener("click", async (e) => {
@@ -40,7 +35,7 @@ document.body.addEventListener("click", async (e) => {
   if (!target) return;
   try {
     await navigator.clipboard.writeText(target.value);
-    showToast("Copied to clipboard");
+    showToast("Copied");
   } catch {
     target.select();
     document.execCommand("copy");
@@ -50,15 +45,15 @@ document.body.addEventListener("click", async (e) => {
 
 // ---- Toast ----
 let toastTimer;
-export function showToast(msg) {
+export function showToast(msg, ms = 2400) {
   const t = document.getElementById("toast");
   t.textContent = msg;
   t.hidden = false;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => (t.hidden = true), 2200);
+  toastTimer = setTimeout(() => (t.hidden = true), ms);
 }
 
-// ---- Routing ----
+// ---- Routing: #/c/<id> opens a board; ?activity=<key> preselects one on the landing page ----
 const landing = document.getElementById("landing");
 const workspace = document.getElementById("workspace");
 
@@ -66,11 +61,14 @@ function showLanding() {
   closeCanvas();
   workspace.hidden = true;
   landing.hidden = false;
+  document.title = "Activity Boards · Business Innovation with Agentic AI and AI Agents";
   if (!isConfigured) document.getElementById("config-warning").hidden = false;
+  showLandingFor(new URL(location.href).searchParams.get("activity"));
 }
 function showWorkspace(canvasId) {
   landing.hidden = true;
   workspace.hidden = false;
+  window.scrollTo(0, 0);
   openCanvas(canvasId);
 }
 
@@ -89,9 +87,12 @@ function route() {
 window.addEventListener("hashchange", route);
 window.addEventListener("popstate", route);
 
-document.getElementById("btn-leave").addEventListener("click", () => {
-  location.hash = "";
+document.getElementById("btn-leave").addEventListener("click", (e) => {
+  e.preventDefault();
+  history.pushState(null, "", location.pathname);
+  route();
 });
 
+mountKeyboxes();
 initLanding();
 route();

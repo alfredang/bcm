@@ -1,210 +1,153 @@
 <div align="center">
 
-# Business Model Canvas Studio
+# Activity Boards: Business Innovation with Agentic AI and AI Agents
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)](https://firebase.google.com/)
-[![QRCode.js](https://img.shields.io/badge/QRCode.js-181717?style=flat-square)](https://github.com/davidshimjs/qrcodejs)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-**Design, validate, and collaborate on business models in real time.**
+**Type your answers on a live board, screenshot it, paste it into your Practical Performance.**
 
-[Live Demo](https://alfredang.github.io/bcm/) · [Report Bug](https://github.com/alfredang/bcm/issues) · [Request Feature](https://github.com/alfredang/bcm/issues)
+[Open the boards](https://alfredang.github.io/bcm/) · [Report a bug](https://github.com/alfredang/bcm/issues)
 
 </div>
 
-## Screenshot
+![Landing page](screenshot.png)
 
-![Screenshot](screenshot.png)
+## What this is
 
-## About
+The online activity tool for the WSQ course **Business Innovation with Agentic AI and AI Agents** (TGS-2023037472, Tertiary Infotech Academy). Each class activity has its own board. Learners open a board with just their name (no login), type their answers into each block as sticky notes, then take a screenshot of the finished board and paste it into their Practical Performance (PP) assessment.
 
-**Business Model Canvas Studio** is a modern, mobile-friendly web app that lets teams build a Business Model Canvas together in real time. Create a canvas, share a QR code or invite link, and collaborate on sticky notes across all nine BMC blocks — with live presence, voting, drag-and-drop, and instant sync.
+| Activity | Board | LO · K&A | Screenshot goes into | Deep link |
+|---|---|---|---|---|
+| 1 | Agentic AI Business Canvas | LO1 · K1, K2, A1, A2 | **PP Task 1** | <https://alfredang.github.io/bcm/?activity=opportunity> |
+| 2 | AI Action Plan | LO2 · K3, K4, A3, A4 | **PP Task 2** | <https://alfredang.github.io/bcm/?activity=actionplan> |
+| 3 | Lead the Change & Run the Company | LO3 · K5, K6, A5, A6 | **PP Task 3** | <https://alfredang.github.io/bcm/?activity=change> |
+| – | Classic Business Model Canvas (practice) | – | not a PP task | <https://alfredang.github.io/bcm/?activity=bmc> |
 
-Built entirely with **plain HTML, CSS, and JavaScript** — no React, no Vue, no build step. Real-time collaboration is powered by Firebase Firestore and invite QR codes are generated client-side with QRCode.js.
+The activity content (block titles, prompts, guiding questions, discussion questions and the worked example) comes from the course build in [`js/templates.js`](js/templates.js). That file is generated; do not edit it by hand.
 
-### Key Features
+## How learners use it
 
-| Feature | Description |
-|---------|-------------|
-| Real-time collaboration | Sticky notes, votes, edits, and presence sync instantly across all participants via Firestore. |
-| QR + invite link sharing | Each canvas exposes a Canvas ID, a deep-link URL, and a scannable QR code. |
-| Full 9-block canvas | Key Partners, Activities, Resources, Value Props, Customer Relationships, Channels, Customer Segments, Cost Structure, Revenue Streams. |
-| Guidance prompts | Each block ships with classic Strategyzer prompt questions to spark discussion. |
-| Sticky notes | Title, description, category tag, priority (Low/Med/High), status (Draft/Validate/Confirmed), votes, author + timestamp. |
-| Drag-and-drop | Reorder notes within a block; order persists across sessions. |
-| Presence | See who else is in the canvas with live initials avatars. |
-| Dark / Light theme | Defaults to dark; toggle persists across reloads. |
-| Mobile-first responsive | Single-column stack on phones, 2-column on tablets, full BMC grid on desktop. |
-| No build step | Open `index.html` directly via any static host. |
+1. **Open a board.** Pick the activity, type your name and your organisation (the board title), press *Create board*. Classmates join from the *Share* QR code or Board ID and edit live.
+2. **Type your answers.** Every block has a *Type your answer…* box: press Enter to save (Shift+Enter for a new line; the first line becomes the headline). The **+** button opens the full note editor (tag, priority, status). Notes can be voted on, edited and dragged to reorder.
+3. **Stuck?** *View example* shows how **Meridian Services Pte Ltd**, a fictional Singapore facilities firm, filled in each block, without writing anything. *Load worked example* copies those notes onto the board, tagged `Example`.
+4. **Hand it in.** *Screenshot view* hides the editing tools and adds a header strip with the course, activity, organisation, learner names and date. From there: **Download PNG**, **Download PDF** (one landscape A4 page), or **Print**. Paste the image into your PP.
 
-## Tech Stack
+## Board screenshots
 
-| Category | Technology |
-|----------|------------|
-| Markup | HTML5 |
-| Styling | CSS3 (custom properties, CSS Grid, responsive media queries) |
-| Logic | Vanilla JavaScript (ES Modules) |
-| Realtime DB | Firebase Cloud Firestore (modular SDK via CDN) |
-| QR Codes | QRCode.js (CDN) |
-| Hosting | GitHub Pages (via GitHub Actions) |
+| Activity 1 · Agentic AI Business Canvas | Activity 2 · AI Action Plan |
+|---|---|
+| ![Activity 1](docs/screens/opportunity.png) | ![Activity 2](docs/screens/actionplan.png) |
+| **Activity 3 · Lead the Change & Run the Company** | **Classic Business Model Canvas** |
+| ![Activity 3](docs/screens/change.png) | ![Classic BMC](docs/screens/bmc.png) |
 
-## Architecture
+## AI business simulator (optional, bring your own key)
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      Browser (Client)                       │
-│                                                             │
-│   ┌──────────────┐      ┌──────────────────────────────┐    │
-│   │ Landing View │────▶│   Workspace View              │    │
-│   │ Create/Join  │      │   ┌─────────────────────┐    │    │
-│   └──────────────┘      │   │   9-block BMC Grid  │    │    │
-│                         │   │  ┌────┬────┬────┐   │    │    │
-│   ┌──────────────┐      │   │  │ KP │ KA │ VP │   │    │    │
-│   │ Theme + Hash │      │   │  │ KR │    │ CR │   │    │    │
-│   │ Router (SPA) │      │   │  └────┴────┴────┘   │    │    │
-│   └──────────────┘      │   │   Sticky notes      │    │    │
-│                         │   └─────────────────────┘    │    │
-│   ┌──────────────┐      │   ┌─────────────────────┐    │    │
-│   │ Note Modal   │      │   │ Share modal (QR)    │    │    │
-│   └──────────────┘      │   └─────────────────────┘    │    │
-│                         └──────────────────────────────┘    │
-│           │                          │                      │
-│           ▼                          ▼                      │
-│   ┌────────────────────┐    ┌────────────────────┐          │
-│   │  QRCode.js (CDN)   │    │ Firebase SDK (CDN) │          │
-│   └────────────────────┘    └─────────┬──────────┘          │
-└─────────────────────────────────────┼───────────────────────┘
-                                      │ onSnapshot, writes
-                                      ▼
-                       ┌──────────────────────────────┐
-                       │     Cloud Firestore          │
-                       │  canvases/{id}               │
-                       │   ├─ blocks/{id}/notes/...   │
-                       │   └─ presence/{participant}  │
-                       └──────────────────────────────┘
-```
+*Simulate with AI* opens a drawer that tests the board against a fictional Singapore business:
 
-## Project Structure
+| Sample business | Sector |
+|---|---|
+| Meridian Services Pte Ltd | Facilities maintenance (the course's worked example) |
+| Lantern Lane Kopi Pte Ltd | F&B kopi chain |
+| Harbourview Family Clinics | GP clinic group |
+| Straits Linkage Logistics Pte Ltd | SME freight forwarder |
+| Keystone & Lim Chartered Accountants | 40-person accounting firm |
+
+All five are invented; any resemblance to a real company is unintended. Actions:
+
+- **Generate dormant data samples**: simulated emails, tickets and chats the business never analyses, and what each one reveals.
+- **Suggest ideas for this block**: three sticky notes you can add in one click (tagged `AI`).
+- **Simulate 90 days**: an outcome story and KPI table for the plan on the board, including one thing that goes wrong.
+- **Play a stakeholder**: how three affected people react to the change.
+
+The simulator calls the Anthropic Messages API (`claude-sonnet-5-5`) **directly from the learner's browser with the learner's own API key**.
+
+> **Privacy.** The key is stored only in that browser's `localStorage` (`bcm.anthropicKey`) and is sent only to `api.anthropic.com`. It is never written to Firestore, never committed to this repository and never logged. *Clear* removes it. The board's notes are sent to Anthropic only when the learner presses a simulator action.
+
+**No key?** The drawer still works for Meridian Services: each action shows a canned example, clearly labelled *Example output (no API key)*.
+
+## Tech stack
+
+| Area | Choice |
+|---|---|
+| Pages | Plain HTML, CSS and ES-module JavaScript. No build step. |
+| Real-time data | Firebase Cloud Firestore (modular SDK from the gstatic CDN) |
+| Sharing | QRCode.js (jsDelivr) |
+| Screenshot export | html2canvas and jsPDF (jsDelivr, loaded only when first used); print stylesheet as fallback |
+| AI | Anthropic Messages API, called with `fetch` from the browser |
+| Hosting | GitHub Pages via GitHub Actions |
+| Design | Tertiary Infotech course-site look: ivory `#FAF9F5`, charcoal `#21201C`, terracotta `#D97757`, teal `#3A7D7B`, Cambria headings, Calibri body. Light by default, dark theme on request. |
+
+## Project structure
 
 ```
 bcm/
-├── index.html              # Landing + Workspace views, modals
-├── css/
-│   └── styles.css          # Theme tokens, BMC grid, sticky notes, modals
+├── index.html            # Landing page, board page, simulator drawer, modals
+├── css/styles.css        # Design tokens (light + dark), layouts, screenshot + print styles
 ├── js/
-│   ├── firebase.js         # Firebase init (Firestore via CDN modules)
-│   ├── app.js              # Hash routing, theme toggle, toast, modals
-│   ├── landing.js          # Create / Join handlers, ID generator
-│   ├── canvas.js           # 9 blocks, guidance, presence, title editing
-│   ├── notes.js            # CRUD, voting, drag-drop reorder, modal editor
-│   └── share.js            # QR code + invite link
-├── .github/
-│   └── workflows/
-│       └── deploy.yml      # GitHub Pages deploy
-├── screenshot.png          # README hero screenshot
-└── README.md
+│   ├── templates.js      # GENERATED by the course build: the activities and worked example
+│   ├── boards.js         # Activity catalogue + classic BMC + retired activities
+│   ├── app.js            # Theme, routing (#/c/<id>, ?activity=, ?join=), toast, modals
+│   ├── landing.js        # Activity cards, create / join
+│   ├── canvas.js         # Board page: header, blocks, typed answers, presence
+│   ├── notes.js          # Sticky notes: live sync, editor, votes, reorder, examples
+│   ├── shot.js           # Screenshot view, PNG / PDF / print
+│   ├── simulator.js      # Simulator drawer and safe Markdown renderer
+│   ├── ai.js             # Anthropic API client and prompts (key stays in localStorage)
+│   ├── businesses.js     # Five fictional businesses + offline example outputs
+│   ├── keybox.js         # API-key box
+│   ├── share.js          # QR code + invite link
+│   └── firebase.js       # Firebase config
+├── docs/screens/         # Board screenshots
+└── screenshot.png        # Landing page screenshot
 ```
 
-## Getting Started
+## Data model (Firestore)
 
-### Prerequisites
+```
+canvases/{boardId}                    title, org, type, ownerName, learners[], createdAt
+canvases/{boardId}/blocks/{blockId}/notes/{noteId}
+                                      title, description, category, priority, status,
+                                      authorId, authorName, votes, voters[], order,
+                                      createdAt, updatedAt
+canvases/{boardId}/presence/{participantId}   name, color, lastSeen
+```
 
-- A modern browser (Chrome, Firefox, Safari, Edge)
-- A Firebase project with **Cloud Firestore** enabled
-- Optional: Python 3 (or any static file server) for local dev
+- `type` is the activity key (`opportunity`, `actionplan`, `change`, `bmc`). Boards made before the course boards have no `type` and open as the classic Business Model Canvas; boards of a retired activity (`companymap`) still open with their notes and a "retired activity" note.
+- `category` is free text; `Example` (worked example) and `AI` (simulator suggestion) are styled tags.
 
-### 1. Clone
+Firestore rules are set by the project owner in the Firebase console. The app expects read/write access to `canvases/**`.
+
+## Run locally
 
 ```bash
 git clone https://github.com/alfredang/bcm.git
 cd bcm
-```
-
-### 2. Configure Firebase
-
-Open [`js/firebase.js`](js/firebase.js) and replace the `firebaseConfig` object with credentials from your own Firebase project (Project Settings → General → Your apps → Web app).
-
-### 3. Set Firestore rules
-
-In the Firebase console (Firestore Database → Rules), publish:
-
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /canvases/{canvasId} {
-      allow read, write: if true;
-      match /{document=**} {
-        allow read, write: if true;
-      }
-    }
-  }
-}
-```
-
-> The rules above are open and intended for demos only. For production, gate writes behind Firebase Auth (e.g., `request.auth != null`).
-
-### 4. Run locally
-
-```bash
 python3 -m http.server 8080
 ```
 
-Then open <http://localhost:8080>. ES modules and Firestore require an HTTP origin — opening `index.html` via `file://` will not work.
+Open <http://localhost:8080>. ES modules need an HTTP origin; `file://` will not work.
 
-## Deployment
+## Deploy
 
-### GitHub Pages (automatic)
-
-This repo includes a workflow at `.github/workflows/deploy.yml` that publishes the static site to GitHub Pages on every push to `main`. After enabling Pages (Settings → Pages → Source: GitHub Actions), the live site will be available at:
-
-```
-https://<owner>.github.io/<repo>/
-```
-
-### Any static host
-
-Because the project has no build step, you can drop the files onto Netlify, Vercel, Cloudflare Pages, S3 + CloudFront, Firebase Hosting, or any static host.
-
-## Usage
-
-1. **Create a canvas** — enter your name and click *Create Canvas*.
-2. **Share** — click *Share* in the workspace top bar to reveal the QR code, Canvas ID, and invite link.
-3. **Collaborate** — teammates join via QR scan or by pasting the Canvas ID on the landing page. Add, edit, vote, and drag notes; everything syncs in real time.
-
-## Contributing
-
-Contributions are welcome.
-
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feat/amazing-thing`)
-3. Commit your changes (`git commit -m 'feat: add amazing thing'`)
-4. Push to your fork (`git push origin feat/amazing-thing`)
-5. Open a Pull Request
-
-For larger ideas, please open an issue first to discuss direction.
-
-## Developed By
-
-**Tertiary Infotech Academy Pte. Ltd.** — [tertiarycourses.com.sg](https://www.tertiarycourses.com.sg/)
+`.github/workflows/deploy-pages.yml` publishes the repository to GitHub Pages on every push to `main`.
 
 ## Acknowledgements
 
-- The Business Model Canvas framework by **Alexander Osterwalder & Yves Pigneur** (Strategyzer).
-- [Firebase](https://firebase.google.com/) for real-time data sync.
-- [QRCode.js](https://github.com/davidshimjs/qrcodejs) for client-side QR generation.
+- Business Model Canvas by **Alexander Osterwalder and Yves Pigneur** (Strategyzer).
+- [Firebase](https://firebase.google.com/), [QRCode.js](https://github.com/davidshimjs/qrcodejs), [html2canvas](https://html2canvas.hertzen.com/), [jsPDF](https://github.com/parallax/jsPDF), [Anthropic API](https://docs.anthropic.com/).
+
+## Developed by
+
+**Tertiary Infotech Academy Pte Ltd**: [tertiarycourses.com.sg](https://www.tertiarycourses.com.sg/)
 
 ## License
 
-Released under the [MIT License](https://opensource.org/licenses/MIT).
+[MIT](https://opensource.org/licenses/MIT)
 
 ---
 
-<div align="center">
-
-If this project helped you, please consider giving it a ⭐ on GitHub.
-
-</div>
+<div align="center">Powered by <a href="https://www.tertiarycourses.com.sg/">Tertiary Infotech Academy Pte Ltd</a></div>

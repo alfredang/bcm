@@ -12,7 +12,7 @@ export function openShareModal(canvasId) {
       text: url,
       width: 160,
       height: 160,
-      colorDark: "#1a1f2e",
+      colorDark: "#21201C",
       colorLight: "#ffffff",
       correctLevel: window.QRCode.CorrectLevel.M
     });
