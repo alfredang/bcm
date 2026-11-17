@@ -12,9 +12,9 @@ export const TEMPLATES = [
   "layout": "bmc",
   "title": "Business Model Canvas for AI Agents",
   "short": "Find the opportunities",
-  "pitch": "The classic nine-block canvas, re-asked for one question: where can AI agents create value in this business?",
+  "pitch": "Identify and evaluate AI agent opportunities with the Business Model Canvas you already know.",
   "musePrompt": "Act as my innovation consultant. Our organisation: [your organisation in two sentences: industry, size, customers, this year's objective]. Draft our Business Model Canvas for AI Agents with these 9 blocks:\n1. Key Partners: Which partners hold the data, systems or AI platforms your agents need?\n2. Key Activities: Which key activities could AI agents do, speed up or watch over?\n3. Key Resources: Which data and know-how would make your agents smart about your business?\n4. Value Propositions: What new or better value can AI agents deliver to your customers?\n5. Customer Relationships: How will agents change the way you serve and keep customers, and where must a human stay?\n6. Channels: Through which channels will your agents meet customers?\n7. Customer Segments: Which customer segments gain most from AI agents, and which still want a person?\n8. Cost Structure: What will the agents cost, and which costs will they remove or add?\n9. Revenue Streams: How will the agents grow revenue or protect it, and which objective do they serve?\n\nRules: two specific notes per block, at most 15 words each, with names, numbers and owners. Use my email and calendar only where relevant and name the source. Mark guesses as (assumption).\nReply ONLY in this format, so I can paste it into our board:\n1. Key Partners\n- first note\n- second note\n2. Key Activities\n- first note\n- second note\n(continue to block 9). End with: Verify first: the three notes I should check.",
-  "evidence": "PP Task 1 · screenshot of your completed canvas",
+  "evidence": "PP Task 1 · screenshot of your BMC",
   "discuss": [
    "Which block of your business model would an AI agent change the most?",
    "Which opportunity moves a number your leadership already tracks?",
@@ -256,11 +256,11 @@ export const TEMPLATES = [
   "lo": "LO2",
   "codes": "K3, K4, A3, A4",
   "layout": "grid",
-  "title": "AI Action Plan",
+  "title": "AI Agent Action Plan (AGENT)",
   "short": "Plan the 90 days",
-  "pitch": "Turn the best opportunity into a 90-day plan with owners, milestones and a stop rule.",
-  "musePrompt": "Act as my innovation consultant. Our organisation: [your organisation in two sentences: industry, size, customers, this year's objective]. Draft our AI Action Plan with these 9 blocks:\n1. Objective & Outcome: Which organisational objective does this serve, and how will you know?\n2. Step 1 · Mine the Business Process: What actually happens today, step by step?\n3. Step 2 · Where Agents Integrate: Which steps go to an agent, which stay human?\n4. Digital Architecture: Which systems, data, agents and controls make it work?\n5. Milestones (30 / 60 / 90 days): What ships when?\n6. DRI, Team & Resources: Who owns it and what can they mobilise?\n7. Risks & Controls: What could go wrong and what stops it?\n8. Success Measures & Review: Which numbers decide scale, redesign or stop?\n9. Cost & Value: What does it cost and what does it return?\n\nRules: two specific notes per block, at most 15 words each, with names, numbers and owners. Use my email and calendar only where relevant and name the source. Mark guesses as (assumption).\nReply ONLY in this format, so I can paste it into our board:\n1. Objective & Outcome\n- first note\n- second note\n2. Step 1 · Mine the Business Process\n- first note\n- second note\n(continue to block 9). End with: Verify first: the three notes I should check.",
-  "evidence": "PP Task 2 · screenshot of your completed action plan",
+  "pitch": "Five moves to get started: Aim, Ground, Embed, Name the owner, Test in 90 days.",
+  "musePrompt": "Act as my innovation consultant. Our organisation: [your organisation in two sentences: industry, size, customers, this year's objective]. Draft our AI Agent Action Plan (AGENT) with these 9 blocks:\n1. A · Objective & Outcome: Which organisational objective does this serve, and how will you know?\n2. A · Cost & Value: What does it cost and what does it return?\n3. G · Mine the Business Process: What actually happens today, step by step?\n4. E · Where Agents Plug In: Which steps go to an agent, which stay human?\n5. E · Digital Architecture: Which systems, data, agents and controls make it work?\n6. N · DRI, Team & Resources: Who owns it and what can they mobilise?\n7. T · Pilot: 30 / 60 / 90 Days: What ships when?\n8. T · Risks & Controls: What could go wrong and what stops it?\n9. T · Success Measures: Which numbers decide scale, redesign or stop?\n\nRules: two specific notes per block, at most 15 words each, with names, numbers and owners. Use my email and calendar only where relevant and name the source. Mark guesses as (assumption).\nReply ONLY in this format, so I can paste it into our board:\n1. A · Objective & Outcome\n- first note\n- second note\n2. A · Cost & Value\n- first note\n- second note\n(continue to block 9). End with: Verify first: the three notes I should check.",
+  "evidence": "PP Task 2 · screenshot of your AGENT board",
   "discuss": [
    "Which step of the mined process gives the fastest visible win?",
    "What must be true at day 30 for you to keep going?",
@@ -271,7 +271,7 @@ export const TEMPLATES = [
    {
     "id": "objective",
     "num": 1,
-    "title": "Objective & Outcome",
+    "title": "A · Objective & Outcome",
     "prompt": "Which organisational objective does this serve, and how will you know?",
     "questions": [
      "Baseline, target and date.",
@@ -285,9 +285,29 @@ export const TEMPLATES = [
     ]
    },
    {
-    "id": "mine",
+    "id": "budget",
     "num": 2,
-    "title": "Step 1 · Mine the Business Process",
+    "title": "A · Cost & Value",
+    "prompt": "What does it cost and what does it return?",
+    "questions": [
+     "Year-1 cost, recurring cost.",
+     "Realised benefit and ROI with a downside case."
+    ],
+    "example": [
+     {
+      "title": "Year 1",
+      "description": "Cost SGD 39,000; realised benefit SGD 39,200 at 60% realisation."
+     },
+     {
+      "title": "Downside",
+      "description": "At 55% adoption, benefit falls; keep scope small until proven."
+     }
+    ]
+   },
+   {
+    "id": "mine",
+    "num": 3,
+    "title": "G · Mine the Business Process",
     "prompt": "What actually happens today, step by step?",
     "questions": [
      "Trigger, steps, handoffs, waits, rework, decisions.",
@@ -306,8 +326,8 @@ export const TEMPLATES = [
    },
    {
     "id": "integrate",
-    "num": 3,
-    "title": "Step 2 · Where Agents Integrate",
+    "num": 4,
+    "title": "E · Where Agents Plug In",
     "prompt": "Which steps go to an agent, which stay human?",
     "questions": [
      "Inform, recommend, prepare, execute-with-approval, execute-with-monitoring.",
@@ -330,8 +350,8 @@ export const TEMPLATES = [
    },
    {
     "id": "architecture",
-    "num": 4,
-    "title": "Digital Architecture",
+    "num": 5,
+    "title": "E · Digital Architecture",
     "prompt": "Which systems, data, agents and controls make it work?",
     "questions": [
      "Data sources, model, connectors (MCP), where people meet the agent, guardrails.",
@@ -353,33 +373,9 @@ export const TEMPLATES = [
     ]
    },
    {
-    "id": "milestones",
-    "num": 5,
-    "title": "Milestones (30 / 60 / 90 days)",
-    "prompt": "What ships when?",
-    "questions": [
-     "Quick win in 30 days.",
-     "Pilot scope at 60; scale decision at 90."
-    ],
-    "example": [
-     {
-      "title": "Day 30",
-      "description": "Agent drafts tickets for 2 sites; coordinators approve 100%."
-     },
-     {
-      "title": "Day 60",
-      "description": "10 sites; measure handling time and rework weekly."
-     },
-     {
-      "title": "Day 90",
-      "description": "Board review: scale, redesign or stop."
-     }
-    ]
-   },
-   {
     "id": "owners",
     "num": 6,
-    "title": "DRI, Team & Resources",
+    "title": "N · DRI, Team & Resources",
     "prompt": "Who owns it and what can they mobilise?",
     "questions": [
      "One DRI with decision rights.",
@@ -401,9 +397,33 @@ export const TEMPLATES = [
     ]
    },
    {
-    "id": "risks",
+    "id": "milestones",
     "num": 7,
-    "title": "Risks & Controls",
+    "title": "T · Pilot: 30 / 60 / 90 Days",
+    "prompt": "What ships when?",
+    "questions": [
+     "Quick win in 30 days.",
+     "Pilot scope at 60; scale decision at 90."
+    ],
+    "example": [
+     {
+      "title": "Day 30",
+      "description": "Agent drafts tickets for 2 sites; coordinators approve 100%."
+     },
+     {
+      "title": "Day 60",
+      "description": "10 sites; measure handling time and rework weekly."
+     },
+     {
+      "title": "Day 90",
+      "description": "Board review: scale, redesign or stop."
+     }
+    ]
+   },
+   {
+    "id": "risks",
+    "num": 8,
+    "title": "T · Risks & Controls",
     "prompt": "What could go wrong and what stops it?",
     "questions": [
      "Wrong action, data leak, bias, over-reliance.",
@@ -422,8 +442,8 @@ export const TEMPLATES = [
    },
    {
     "id": "kpis",
-    "num": 8,
-    "title": "Success Measures & Review",
+    "num": 9,
+    "title": "T · Success Measures",
     "prompt": "Which numbers decide scale, redesign or stop?",
     "questions": [
      "Leading and lagging KPIs.",
@@ -439,26 +459,6 @@ export const TEMPLATES = [
       "description": "Weekly DRI review; day-90 board decision."
      }
     ]
-   },
-   {
-    "id": "budget",
-    "num": 9,
-    "title": "Cost & Value",
-    "prompt": "What does it cost and what does it return?",
-    "questions": [
-     "Year-1 cost, recurring cost.",
-     "Realised benefit and ROI with a downside case."
-    ],
-    "example": [
-     {
-      "title": "Year 1",
-      "description": "Cost SGD 39,000; realised benefit SGD 39,200 at 60% realisation."
-     },
-     {
-      "title": "Downside",
-      "description": "At 55% adoption, benefit falls; keep scope small until proven."
-     }
-    ]
    }
   ]
  },
@@ -469,11 +469,11 @@ export const TEMPLATES = [
   "lo": "LO3",
   "codes": "K5, K6, A5, A6",
   "layout": "grid",
-  "title": "Lead the Change & Run the Company",
+  "title": "Sustain and Operate with AI Agents (SCALE)",
   "short": "Communicate and run it",
-  "pitch": "Tell every stakeholder what changes for them, then run the company on DRIs, agents and honest numbers.",
-  "musePrompt": "Act as my innovation consultant. Our organisation: [your organisation in two sentences: industry, size, customers, this year's objective]. Draft our Lead the Change & Run the Company with these 9 blocks:\n1. The Change Story: Why, what and when, in three sentences anyone can repeat.\n2. Stakeholder Map: Who is affected, how much, and what do they worry about?\n3. Messages & Channels: What does each group hear, from whom, through which channel?\n4. DRIs & Agent Teams: Who is the one person accountable for each outcome?\n5. Workforce Transition: Where will each role land, and how will you help?\n6. Information Flow & Rhythm: How does information flow without layers of relay?\n7. Review Success: How will you judge whether the innovation worked?\n8. Guardrails & Judgement: How do you keep people genuinely judging, not rubber-stamping?\n9. Idea Pipeline: How do staff share and develop the next innovation?\n\nRules: two specific notes per block, at most 15 words each, with names, numbers and owners. Use my email and calendar only where relevant and name the source. Mark guesses as (assumption).\nReply ONLY in this format, so I can paste it into our board:\n1. The Change Story\n- first note\n- second note\n2. Stakeholder Map\n- first note\n- second note\n(continue to block 9). End with: Verify first: the three notes I should check.",
-  "evidence": "PP Task 3 · screenshot of your completed change board",
+  "pitch": "Five moves to run the business with AI agents: Story, Commanders, Augment people, Loop information, Evaluate.",
+  "musePrompt": "Act as my innovation consultant. Our organisation: [your organisation in two sentences: industry, size, customers, this year's objective]. Draft our Sustain and Operate with AI Agents (SCALE) with these 9 blocks:\n1. S · The Change Story: Why, what and when, in three sentences anyone can repeat.\n2. S · Stakeholder Map: Who is affected, how much, and what do they worry about?\n3. S · Messages & Channels: What does each group hear, from whom, through which channel?\n4. C · DRIs & Agent Teams: Who is the one person accountable for each outcome?\n5. A · Workforce Transition: Where will each role land, and how will you help?\n6. A · Guardrails & Judgement: How do you keep people genuinely judging, not rubber-stamping?\n7. L · Information Flow & Rhythm: How does information flow without layers of relay?\n8. L · Idea Pipeline: How do staff share and develop the next innovation?\n9. E · Evaluate: Review Success: How will you judge whether the innovation worked?\n\nRules: two specific notes per block, at most 15 words each, with names, numbers and owners. Use my email and calendar only where relevant and name the source. Mark guesses as (assumption).\nReply ONLY in this format, so I can paste it into our board:\n1. S · The Change Story\n- first note\n- second note\n2. S · Stakeholder Map\n- first note\n- second note\n(continue to block 9). End with: Verify first: the three notes I should check.",
+  "evidence": "PP Task 3 · screenshot of your SCALE board",
   "discuss": [
    "Which group hears about the change last today, and should hear first?",
    "Which manager role becomes a DRI, a coach or a translator?",
@@ -484,7 +484,7 @@ export const TEMPLATES = [
    {
     "id": "story",
     "num": 1,
-    "title": "The Change Story",
+    "title": "S · The Change Story",
     "prompt": "Why, what and when, in three sentences anyone can repeat.",
     "questions": [
      "What problem are we solving?",
@@ -508,7 +508,7 @@ export const TEMPLATES = [
    {
     "id": "stakeholders",
     "num": 2,
-    "title": "Stakeholder Map",
+    "title": "S · Stakeholder Map",
     "prompt": "Who is affected, how much, and what do they worry about?",
     "questions": [
      "Sponsor, DRIs, frontline, clients, unions, regulators.",
@@ -532,7 +532,7 @@ export const TEMPLATES = [
    {
     "id": "messages",
     "num": 3,
-    "title": "Messages & Channels",
+    "title": "S · Messages & Channels",
     "prompt": "What does each group hear, from whom, through which channel?",
     "questions": [
      "Town hall, team huddle, email, FAQ, client letter.",
@@ -556,7 +556,7 @@ export const TEMPLATES = [
    {
     "id": "dri",
     "num": 4,
-    "title": "DRIs & Agent Teams",
+    "title": "C · DRIs & Agent Teams",
     "prompt": "Who is the one person accountable for each outcome?",
     "questions": [
      "Decision rights, resource rights, boundaries.",
@@ -576,7 +576,7 @@ export const TEMPLATES = [
    {
     "id": "workforce",
     "num": 5,
-    "title": "Workforce Transition",
+    "title": "A · Workforce Transition",
     "prompt": "Where will each role land, and how will you help?",
     "questions": [
      "DRI, human-to-human, rubber-stamp, rule-bound work.",
@@ -598,9 +598,29 @@ export const TEMPLATES = [
     ]
    },
    {
-    "id": "rhythm",
+    "id": "guardrails",
     "num": 6,
-    "title": "Information Flow & Rhythm",
+    "title": "A · Guardrails & Judgement",
+    "prompt": "How do you keep people genuinely judging, not rubber-stamping?",
+    "questions": [
+     "Atrophy trap: where could approval become a click?",
+     "PDPA, security, audit trail."
+    ],
+    "example": [
+     {
+      "title": "Sample audits",
+      "description": "Reviewers re-do 5 tickets a week unassisted."
+     },
+     {
+      "title": "Audit trail",
+      "description": "Every agent action logged with who asked and when."
+     }
+    ]
+   },
+   {
+    "id": "rhythm",
+    "num": 7,
+    "title": "L · Information Flow & Rhythm",
     "prompt": "How does information flow without layers of relay?",
     "questions": [
      "Dashboards, daily brief, weekly review, monthly board.",
@@ -622,49 +642,9 @@ export const TEMPLATES = [
     ]
    },
    {
-    "id": "success",
-    "num": 7,
-    "title": "Review Success",
-    "prompt": "How will you judge whether the innovation worked?",
-    "questions": [
-     "KPIs vs baseline, adoption, quality, cost.",
-     "Scale, redesign, hold or stop: who decides?"
-    ],
-    "example": [
-     {
-      "title": "Day-90 review",
-      "description": "Handling time 10.7 min, quality 95.1%, complaints 1.7%, adoption 77.5%."
-     },
-     {
-      "title": "Decision",
-      "description": "Scale to all 30 sites with the same approval rules."
-     }
-    ]
-   },
-   {
-    "id": "guardrails",
-    "num": 8,
-    "title": "Guardrails & Judgement",
-    "prompt": "How do you keep people genuinely judging, not rubber-stamping?",
-    "questions": [
-     "Atrophy trap: where could approval become a click?",
-     "PDPA, security, audit trail."
-    ],
-    "example": [
-     {
-      "title": "Sample audits",
-      "description": "Reviewers re-do 5 tickets a week unassisted."
-     },
-     {
-      "title": "Audit trail",
-      "description": "Every agent action logged with who asked and when."
-     }
-    ]
-   },
-   {
     "id": "ideas",
-    "num": 9,
-    "title": "Idea Pipeline",
+    "num": 8,
+    "title": "L · Idea Pipeline",
     "prompt": "How do staff share and develop the next innovation?",
     "questions": [
      "Where do ideas go? Who reviews them?",
@@ -678,6 +658,26 @@ export const TEMPLATES = [
      {
       "title": "Monthly pitch",
       "description": "Top 3 ideas pitched to leadership; winner gets a DRI and 30 days."
+     }
+    ]
+   },
+   {
+    "id": "success",
+    "num": 9,
+    "title": "E · Evaluate: Review Success",
+    "prompt": "How will you judge whether the innovation worked?",
+    "questions": [
+     "KPIs vs baseline, adoption, quality, cost.",
+     "Scale, redesign, hold or stop: who decides?"
+    ],
+    "example": [
+     {
+      "title": "Day-90 review",
+      "description": "Handling time 10.7 min, quality 95.1%, complaints 1.7%, adoption 77.5%."
+     },
+     {
+      "title": "Decision",
+      "description": "Scale to all 30 sites with the same approval rules."
      }
     ]
    }
