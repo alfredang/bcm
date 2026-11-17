@@ -65,7 +65,7 @@ const ICON_DEL = `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" st
 
 function tagHTML(cat) {
   if (!cat) return "";
-  const cls = cat === "Example" ? "tag tag-example" : cat === "AI" ? "tag tag-ai" : "tag";
+  const cls = cat === "Example" ? "tag tag-example" : cat === "Muse" ? "tag tag-muse" : "tag";
   return `<span class="${cls}">${escapeHtml(cat)}</span>`;
 }
 
@@ -269,7 +269,7 @@ export async function addTypedAnswer(blockId, text) {
   }
 }
 
-/** Add several notes at once (AI suggestions). */
+/** Add several notes at once (Muse answers). */
 export async function addNotes(blockId, notes, category) {
   if (!isConfigured) return false;
   const batch = writeBatch(db);

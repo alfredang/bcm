@@ -2,7 +2,7 @@
 // (course, activity, organisation, learners, date) above the board.
 // Download PNG uses html2canvas; Download PDF adds jsPDF for a one-page landscape A4.
 // Both libraries load from jsDelivr only when first needed. Print uses the print stylesheet.
-import { getCurrentTemplate, getMeta, learnerNames } from "./canvas.js";
+import { getCurrentTemplate, getMeta, learnerNames, getMe } from "./canvas.js";
 import { activityLabel, ppTask } from "./boards.js";
 import { showToast } from "./app.js";
 
@@ -38,23 +38,30 @@ export function fillStrip() {
   const t = getCurrentTemplate();
   if (!t) return;
   const meta = getMeta();
-  const names = learnerNames();
+  const me = getMe().name;
+  const others = learnerNames().filter(n => n !== me);
   const pp = ppTask(t);
   document.getElementById("shot-title").textContent = `${activityLabel(t)} · ${t.title}`;
+  const groupEl = document.getElementById("shot-group");
+  groupEl.textContent = meta.group || meta.org || "";
+  groupEl.hidden = !groupEl.textContent;
   document.getElementById("shot-meta").innerHTML = [
-    `Organisation: <b>${esc(meta.org || "—")}</b>`,
-    `Learner${names.length === 1 ? "" : "s"}: <b>${esc(names.join(", ") || "—")}</b>`,
+    `Learner: <b>${esc(me)}</b>`,
+    others.length ? `Group members: <b>${esc(others.join(", "))}</b>` : "",
+    meta.group && meta.org ? `Organisation: <b>${esc(meta.org)}</b>` : "",
     `Date: <b>${esc(todayLabel())}</b>`,
     pp ? `Evidence for <b>${esc(pp)}</b>` : esc(t.evidence)
-  ].join(" &nbsp;·&nbsp; ");
+  ].filter(Boolean).join(" &nbsp;·&nbsp; ");
 }
 
 function fileBase() {
   const t = getCurrentTemplate();
-  const org = (getMeta().org || "board").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+  const m = getMeta();
+  const org = (m.group || m.org || "board").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
   const d = new Date();
   const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}`;
-  return `${t?.num ? `activity${t.num}` : "bmc"}-${t?.key || "board"}-${org || "board"}-${ymd}`;
+  const me = getMe().name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 30);
+  return `${t?.num ? `activity${t.num}` : "board"}-${org || "board"}-${me || "learner"}-${ymd}`;
 }
 
 export function enterShot() {
@@ -83,7 +90,9 @@ async function renderCanvas(targetAspect) {
   const el = document.getElementById("capture");
   const bg = getComputedStyle(document.body).backgroundColor;
   const oldWidth = el.style.width;
-  let width = Math.max(1100, el.scrollWidth);
+  // Pin the width while rendering so html2canvas lays the clone out exactly as measured
+  let width = Math.max(1100, Math.round(el.getBoundingClientRect().width));
+  el.style.width = `${width}px`;
   if (targetAspect) {
     let best = { w: width, diff: Infinity };
     for (const w of [1300, 1500, 1700, 1900, 2150, 2400]) {
@@ -100,7 +109,7 @@ async function renderCanvas(targetAspect) {
       scale: targetAspect ? 1.6 : 2,
       useCORS: true,
       logging: false,
-      windowWidth: Math.max(1400, width + 40),
+      windowWidth: Math.max(1200, width),
       width: el.scrollWidth,
       height: el.scrollHeight
     });
@@ -165,7 +174,7 @@ export async function downloadPdf() {
       const w = canvas.width * ratio;
       const h = canvas.height * ratio;
       const t = getCurrentTemplate();
-      pdf.setProperties({ title: `${activityLabel(t)} · ${t.title} · ${getMeta().org || ""}`, creator: "Activity Boards · Tertiary Infotech Academy" });
+      pdf.setProperties({ title: `${activityLabel(t)} · ${t.title} · ${getMeta().group || getMeta().org || ""} · ${getMe().name}`, creator: "Activity Boards · Tertiary Infotech Academy" });
       pdf.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", (pageW - w) / 2, margin, w, h);
       pdf.save(`${fileBase()}.pdf`);
       showToast("PDF downloaded");

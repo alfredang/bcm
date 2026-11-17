@@ -1,5 +1,5 @@
-// Board catalogue: the course activities (generated in js/templates.js; do not edit that file)
-// plus the classic Business Model Canvas, kept so canvases made before the course boards still open.
+// Board catalogue: the course activities (generated in js/templates.js; do not edit that file).
+// The classic Business Model Canvas and retired activities are kept only so older boards still open.
 import { TEMPLATES, EXAMPLE_COMPANY, EXAMPLE_BLURB } from "./templates.js";
 
 export const COURSE = {
@@ -21,7 +21,7 @@ export const BMC_TEMPLATE = {
   title: "Classic Business Model Canvas",
   short: "Map any business model",
   pitch: "The original nine-block canvas by Osterwalder and Pigneur: who you serve, what you offer, and how the money works.",
-  evidence: "Practice board · not a PP task",
+  evidence: "Classic canvas · not a PP task",
   discuss: [
     "Which block would change first if an AI agent took over one key activity?",
     "Which customer segment pays for the value proposition, and which only uses it?",
@@ -125,26 +125,29 @@ export const RETIRED_TEMPLATES = [
   }
 ];
 
-/** Boards offered for new work: the course activities, then the classic BMC. */
-export const ALL_TEMPLATES = [...TEMPLATES, BMC_TEMPLATE];
-const BY_KEY = Object.fromEntries(ALL_TEMPLATES.map(t => [t.key, t]));
+/** Boards offered for new work: only the course activities. */
+export const CREATABLE_TEMPLATES = TEMPLATES;
+const BY_KEY = Object.fromEntries(TEMPLATES.map(t => [t.key, t]));
 // A key that is current in templates.js always wins over a retired copy.
 const RETIRED_BY_KEY = Object.fromEntries(RETIRED_TEMPLATES.filter(t => !BY_KEY[t.key]).map(t => [t.key, t]));
 
 /**
- * Template for a canvas `type`. Old canvases have no type and open as the classic BMC;
- * canvases of a retired activity open with that activity's blocks and a "retired" note.
+ * Template for a canvas `type`. Old canvases have no type (or type "bmc") and open with the
+ * classic BMC blocks; canvases of a retired activity open with that activity's blocks and a
+ * "retired" note. Neither is offered for new boards.
  */
 export function getTemplate(key) {
   return BY_KEY[key] || RETIRED_BY_KEY[key] || BMC_TEMPLATE;
 }
+/** Every template a board can open with (for tools that need all block ids). */
+export const ALL_KNOWN_TEMPLATES = [...TEMPLATES, BMC_TEMPLATE, ...RETIRED_TEMPLATES];
 /** True only for boards that can be created now. */
 export function hasTemplate(key) { return Boolean(BY_KEY[key]); }
 
 /** "Activity 1" for course boards, "Practice board" for the classic BMC. */
 export function activityLabel(t) {
   if (t.retired) return "Retired activity";
-  return t.num ? `Activity ${t.num}` : "Practice board";
+  return t.num ? `Activity ${t.num}` : "Classic canvas";
 }
 
 /** The PP task a board's screenshot goes into, or "" when it feeds another activity. */
@@ -164,6 +167,19 @@ export function templateColor(t) {
   if (t.retired) return "var(--muted)";
   const cycle = ["var(--accent)", "var(--teal)", "var(--rust)", "var(--gold)", "var(--c7)"];
   return cycle[((t.num || 1) - 1) % cycle.length];
+}
+
+/**
+ * The Meta Muse prompt for a board: the course's own `musePrompt` from templates.js, or the
+ * same pattern built from the blocks for boards that have none (classic BMC, retired activities).
+ */
+export function musePromptFor(t) {
+  if (t.musePrompt) return t.musePrompt;
+  return [
+    `Act as my innovation consultant. My organisation: [two sentences: industry, size, customers, this year's objective]. Draft our ${t.title}. For each block below give two specific notes of at most 15 words, with names, numbers and owners. Use my email and calendar only where relevant and quote the source. Mark guesses as (assumption).`,
+    ...t.blocks.map(b => `${b.num}. ${b.title}: ${b.prompt}`),
+    "Finish with the three notes I should verify first."
+  ].join("\n");
 }
 
 export function escapeHtml(s) {

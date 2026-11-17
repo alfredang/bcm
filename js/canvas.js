@@ -7,7 +7,6 @@ import { openShareModal } from "./share.js";
 import { showToast } from "./app.js";
 import { getTemplate, activityLabel, ppTask, blockColor, escapeHtml, COURSE } from "./boards.js";
 import { enterShot, exitShot } from "./shot.js";
-import { openSimulator, closeSimulator } from "./simulator.js";
 
 const PARTICIPANT_KEY = "bmc.participantId";
 const NAME_KEY = "bmc.displayName";
@@ -16,7 +15,7 @@ const COLORS = ["#D97757", "#3A7D7B", "#A06A12", "#A84F2E", "#4F6D8A", "#6E7F3A"
 
 let currentCanvasId = null;
 let currentTemplate = null;
-let meta = { org: "", learners: [], ownerName: "" };
+let meta = { group: "", org: "", learners: [], ownerName: "" };
 let unsubCanvasMeta = null;
 let unsubPresence = null;
 let presenceInterval = null;
@@ -45,10 +44,13 @@ export function getMeta() { return meta; }
 export function getMe() {
   return { id: getParticipantId(), name: localStorage.getItem(NAME_KEY) || "Guest", color: getColor() };
 }
-/** Learner names for the header and screenshot: owner first, then everyone who opened the board. */
+/**
+ * Group members for the header and screenshot: the creator, then everyone who opened the
+ * board. A trainer who batch-creates boards (createdVia "trainer") is not a member.
+ */
 export function learnerNames() {
-  const all = [meta.ownerName, ...(meta.learners || [])].map(s => (s || "").trim()).filter(Boolean);
-  return [...new Set(all)];
+  const list = [...(meta.trainerMade ? [] : [meta.ownerName]), ...meta.learners];
+  return [...new Set(list.map(s => (s || "").trim()).filter(Boolean))];
 }
 
 // ---- Name prompt (no login, just a name) ----
@@ -97,9 +99,11 @@ function renderMeta() {
   if (!t) return;
   const orgInput = document.getElementById("board-org");
   if (document.activeElement !== orgInput) orgInput.value = meta.org || "";
+  const groupInput = document.getElementById("board-group");
+  if (document.activeElement !== groupInput) groupInput.value = meta.group || "";
   const names = learnerNames();
-  document.getElementById("chip-learners").textContent = names.length ? `Learners: ${names.join(", ")}` : "Learners: —";
-  document.title = `${meta.org || "Board"} · ${t.title}`;
+  document.getElementById("chip-learners").textContent = names.length ? `Group members: ${names.join(", ")}` : "Group members: —";
+  document.title = `${meta.group || meta.org || "Board"} · ${t.title}`;
 }
 
 const ICON_INFO = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
@@ -190,26 +194,36 @@ async function joinPresence(canvasId) {
 
 function applyMeta(data) {
   meta = {
-    org: data?.org || data?.title || "",
+    group: data?.group || "",
+    // Boards from before `org` existed used the title as the organisation
+    org: data?.org ?? (data?.group ? "" : (data?.title || "")),
     learners: Array.isArray(data?.learners) ? data.learners : [],
+    trainerMade: data?.createdVia === "trainer",
     ownerName: data?.ownerName || ""
   };
   renderMeta();
 }
 
-// Organisation (board title) editing
-const orgInput = document.getElementById("board-org");
-orgInput.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); orgInput.blur(); } });
-orgInput.addEventListener("blur", async () => {
-  const id = currentCanvasId;
-  const org = orgInput.value.trim();
-  if (!id || !org || org === meta.org) { orgInput.value = meta.org; return; }
-  meta.org = org;
-  renderMeta();
-  if (!isConfigured) return;
-  try { await updateDoc(doc(db, "canvases", id), { org, title: org }); }
-  catch (e) { console.error(e); showToast("Could not save the organisation name"); }
-});
+// Group name (the board title) and organisation editing
+function bindMetaInput(inputId, field, label) {
+  const input = document.getElementById(inputId);
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); input.blur(); } });
+  input.addEventListener("blur", async () => {
+    const id = currentCanvasId;
+    const value = input.value.trim();
+    if (!id || !value || value === meta[field]) { input.value = meta[field] || ""; return; }
+    meta[field] = value;
+    renderMeta();
+    if (!isConfigured) return;
+    // The board title is the group name; boards without one keep the organisation as title
+    const update = { [field]: value };
+    if (field === "group" || !meta.group) update.title = value;
+    try { await updateDoc(doc(db, "canvases", id), update); }
+    catch (e) { console.error(e); showToast(`Could not save the ${label}`); }
+  });
+}
+bindMetaInput("board-group", "group", "group name");
+bindMetaInput("board-org", "org", "organisation");
 
 // Toolbar (bound once; acts on the open board)
 document.getElementById("btn-share").addEventListener("click", () => currentCanvasId && openShareModal(currentCanvasId));
@@ -220,7 +234,6 @@ document.getElementById("btn-view-example").addEventListener("click", (e) => {
 });
 document.getElementById("btn-load-example").addEventListener("click", () => loadWorkedExample());
 document.getElementById("btn-shot").addEventListener("click", () => enterShot());
-document.getElementById("btn-sim").addEventListener("click", () => openSimulator());
 
 export async function openCanvas(canvasId) {
   const token = ++openToken;
@@ -264,7 +277,7 @@ export async function openCanvas(canvasId) {
 
   const ref = doc(db, "canvases", canvasId);
   unsubCanvasMeta = onSnapshot(ref, (snap) => { if (snap.exists()) applyMeta(snap.data()); });
-  if (!learnerNames().includes(name)) {
+  if (!(meta.learners || []).includes(name)) {
     updateDoc(ref, { learners: arrayUnion(name) }).catch(e => console.error("learner add failed", e));
   }
   joinPresence(canvasId);
@@ -276,7 +289,6 @@ export function closeCanvas() {
   if (presenceInterval) { clearInterval(presenceInterval); presenceInterval = null; }
   unmountNotes();
   exitShot();
-  closeSimulator();
   currentCanvasId = null;
   document.getElementById("presence").innerHTML = "";
 }

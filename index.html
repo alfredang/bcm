@@ -18,16 +18,14 @@
     <div class="side-kicker">TGS-2023037472 · Activity boards</div>
     <div class="side-course">Business Innovation with Agentic AI and AI Agents</div>
 
-    <div class="keybox" data-keybox></div>
-
     <nav class="side-nav" aria-label="Activities">
       <h4>Start</h4>
       <a href="./" class="on">All activities</a>
       <h4>Class activities</h4>
       <div id="side-activities"></div>
       <h4>More</h4>
-      <a href="?activity=bmc#start">Classic Business Model Canvas</a>
-      <a href="#join">Join a board by ID</a>
+      <a href="#join">Join your group board</a>
+      <a href="#/trainer">Trainer: create group boards</a>
     </nav>
 
     <button class="theme-btn" data-theme-toggle type="button">
@@ -38,49 +36,65 @@
   <main class="main">
     <div class="kicker">TGS-2023037472 · Tertiary Infotech Academy</div>
     <h1 id="landing-h1">One board per learning outcome, one screenshot per PP task</h1>
-    <p class="lead">Open a board, type your answers straight into each block, then screenshot the finished board into your Practical Performance. No login: just your name. Classmates join the same board from a QR code and edit with you live.</p>
-
-    <div class="callout">
-      <strong>Stuck on a blank block?</strong> Press <b>View example</b> on any board to see how <b>Meridian Services Pte Ltd</b>, a fictional Singapore facilities firm, filled it in.
-    </div>
-
-    <h2>Pick your activity</h2>
-    <div id="activity-cards" class="act-grid"></div>
+    <p class="lead">Your group builds each activity together on one shared board. Join with the Board ID or QR code from your trainer, type your answers straight into each block, then screenshot the finished board into your Practical Performance. No login: just your name.</p>
 
     <div class="start-row">
-      <section id="start" class="panel start-panel">
-        <div class="kicker">New board</div>
-        <h3>Start your board</h3>
+      <section id="join" class="panel join-panel">
+        <div class="kicker">Learners start here</div>
+        <h3>Join your group board</h3>
+        <p class="caption">Scan the QR code your trainer shows, or paste the Board ID or join link.</p>
+        <label class="field">
+          <span>Board ID or join link</span>
+          <input id="join-id" type="text" placeholder="e.g. bright-otter-1234" autocomplete="off" />
+        </label>
+        <label class="field">
+          <span>Your name</span>
+          <input id="join-name" type="text" placeholder="e.g. Tan Wei Ling" autocomplete="name" maxlength="60" />
+        </label>
+        <button id="btn-join" class="btn btn-primary btn-block" type="button">Join group board</button>
+      </section>
+
+      <section id="start" class="panel create-panel">
+        <div class="kicker teal">Group leader or trainer</div>
+        <h3>Create a group board</h3>
         <label class="field">
           <span>Activity</span>
           <select id="create-type"></select>
         </label>
         <label class="field">
+          <span>Group name (the board title)</span>
+          <input id="create-group" type="text" placeholder="e.g. Group 3 · Meridian Services" maxlength="60" />
+        </label>
+        <label class="field">
+          <span>Organisation</span>
+          <input id="create-org" type="text" placeholder="e.g. Meridian Services Pte Ltd" maxlength="80" />
+        </label>
+        <label class="field">
           <span>Your name</span>
           <input id="create-name" type="text" placeholder="e.g. Tan Wei Ling" autocomplete="name" maxlength="60" />
         </label>
-        <label class="field">
-          <span>Organisation (your board title)</span>
-          <input id="create-org" type="text" placeholder="e.g. your company, or Meridian Services Pte Ltd" maxlength="80" />
-        </label>
-        <button id="btn-create" class="btn btn-primary btn-block" type="button">Create board</button>
-      </section>
-
-      <section id="join" class="panel">
-        <div class="kicker teal">Already started?</div>
-        <h3>Join a board</h3>
-        <p class="caption">Paste the Board ID your trainer or teammate shared, or scan their QR code.</p>
-        <label class="field">
-          <span>Your name</span>
-          <input id="join-name" type="text" placeholder="e.g. Tan Wei Ling" autocomplete="name" maxlength="60" />
-        </label>
-        <label class="field">
-          <span>Board ID</span>
-          <input id="join-id" type="text" placeholder="e.g. bright-otter-1234" autocomplete="off" />
-        </label>
-        <button id="btn-join" class="btn btn-ink btn-block" type="button">Join board</button>
+        <button id="btn-create" class="btn btn-ink btn-block" type="button">Create group board</button>
+        <p class="caption">Then press <b>Share</b> on the board to show your group the QR code.</p>
       </section>
     </div>
+
+    <p class="pp-hint">Discuss and build it together on your group board. For the PP, every member pastes the group board screenshot and writes their own answers.</p>
+
+    <div class="callout">
+      <strong>Stuck on a blank block?</strong> Press <b>View example</b> on any board to see how <b>Meridian Services Pte Ltd</b>, a fictional Singapore facilities firm, filled it in.
+    </div>
+
+    <h2>The activities</h2>
+    <div id="activity-cards" class="act-grid"></div>
+
+    <section class="panel trainer-panel">
+      <div>
+        <div class="kicker">Trainer</div>
+        <h3>Create group boards for the whole class</h3>
+        <p class="caption">Pick an activity and the number of groups (1-10). You get one printable page with every group's Board ID, join link and QR code.</p>
+      </div>
+      <a class="btn btn-ink" href="#/trainer">Create group boards</a>
+    </section>
 
     <h2>Where each screenshot goes</h2>
     <div class="table-wrap">
@@ -97,8 +111,70 @@
     <footer class="foot">
       <span>Powered by <a href="https://www.tertiarycourses.com.sg/" target="_blank" rel="noopener noreferrer">Tertiary Infotech Academy Pte Ltd</a></span>
       <span class="sep">·</span>
-      <span>Meridian Services and the simulator's sample businesses are fictional.</span>
+      <span>Meridian Services Pte Ltd, the worked example, is fictional.</span>
     </footer>
+  </main>
+</div>
+
+<!-- ================= TRAINER: CREATE GROUP BOARDS ================= -->
+<div id="trainer" class="trainer-page" hidden>
+  <header class="board-bar">
+    <a href="./" class="bar-back" data-home>&larr; All activities</a>
+    <span class="bar-kicker">TGS-2023037472 · Trainer</span>
+    <div class="bar-right">
+      <button class="icon-btn" data-theme-toggle type="button" aria-label="Toggle dark theme" title="Toggle dark theme">
+        <svg class="when-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="when-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </header>
+  <main class="trainer-main">
+    <div class="kicker">Trainer</div>
+    <h1>One board per group, ready before class</h1>
+    <p class="lead">Create every group's board in one go, then print this page or put it on screen. Learners scan their group's QR code and join with their name.</p>
+
+    <section id="trainer-form" class="panel trainer-form">
+      <div class="row-2">
+        <label class="field">
+          <span>Activity</span>
+          <select id="tr-type"></select>
+        </label>
+        <label class="field">
+          <span>Number of groups (1-10)</span>
+          <input id="tr-count" type="number" min="1" max="10" value="4" />
+        </label>
+      </div>
+      <div class="row-2">
+        <label class="field">
+          <span>Organisation (optional)</span>
+          <input id="tr-org" type="text" maxlength="80" placeholder="e.g. Meridian Services Pte Ltd" />
+        </label>
+        <label class="field">
+          <span>Your name</span>
+          <input id="tr-name" type="text" maxlength="60" placeholder="Trainer" />
+        </label>
+      </div>
+      <label class="field">
+        <span>Group names (optional, one per line; blank lines become "Group N")</span>
+        <textarea id="tr-names" rows="4" placeholder="Group 1 · Meridian Services&#10;Group 2 · Lantern Lane Kopi"></textarea>
+      </label>
+      <button id="tr-create" class="btn btn-primary btn-block" type="button">Create group boards</button>
+    </section>
+
+    <section id="trainer-out" class="trainer-out" hidden>
+      <div class="trainer-out-head">
+        <div>
+          <div class="kicker" id="tr-out-kicker"></div>
+          <h2 id="tr-out-title"></h2>
+          <p class="caption" id="tr-out-help"></p>
+        </div>
+        <div class="trainer-out-actions">
+          <button id="tr-print" class="btn btn-ink" type="button">Print this page</button>
+          <button id="tr-again" class="btn" type="button">Create more</button>
+        </div>
+      </div>
+      <div id="tr-cards" class="group-cards"></div>
+    </section>
   </main>
 </div>
 
@@ -120,9 +196,13 @@
     <div class="intro-main">
       <div id="board-kicker" class="kicker"></div>
       <h1 id="board-title"></h1>
+      <div class="org-row group-row">
+        <label for="board-group" class="org-label">Group</label>
+        <input id="board-group" class="org-input group-input" type="text" maxlength="60" placeholder="Add your group name" aria-label="Group name (board title)" />
+      </div>
       <div class="org-row">
         <label for="board-org" class="org-label">Organisation</label>
-        <input id="board-org" class="org-input" type="text" maxlength="80" aria-label="Organisation (board title)" />
+        <input id="board-org" class="org-input" type="text" maxlength="80" placeholder="Add the organisation" aria-label="Organisation" />
       </div>
       <p id="board-pitch" class="lead"></p>
       <div id="retired-note" class="callout callout-rose" hidden>
@@ -134,10 +214,23 @@
         <span id="chip-id" class="chip chip-mono"></span>
       </div>
     </div>
-    <details id="discuss" class="discuss">
-      <summary>Discuss before you write</summary>
-      <ol id="discuss-list"></ol>
-    </details>
+    <div class="intro-side">
+      <section class="muse-panel" aria-labelledby="muse-h">
+        <div class="muse-head">
+          <h3 id="muse-h">Draft with Meta Muse</h3>
+          <span class="caption">Muse drafts. You choose what is true.</span>
+        </div>
+        <ol class="muse-steps">
+          <li><button id="btn-muse-copy" class="btn btn-primary btn-sm" type="button">Copy Muse prompt</button></li>
+          <li><a id="lnk-muse" class="btn btn-sm" href="https://muse.ai/" target="_blank" rel="noopener noreferrer">Open Meta Muse &#8599;</a></li>
+          <li><button id="btn-muse-paste" class="btn btn-ink btn-sm" type="button">Paste Muse answer</button></li>
+        </ol>
+      </section>
+      <details id="discuss" class="discuss">
+        <summary>Discuss before you write</summary>
+        <ol id="discuss-list"></ol>
+      </details>
+    </div>
   </section>
 
   <div class="toolbar" role="toolbar" aria-label="Board tools">
@@ -145,7 +238,6 @@
     <button id="btn-load-example" class="btn" type="button">Load worked example</button>
     <button id="btn-shot" class="btn" type="button">Screenshot view</button>
     <span class="toolbar-gap"></span>
-    <button id="btn-sim" class="btn btn-primary" type="button">Simulate with AI</button>
     <button id="btn-share" class="btn btn-ink" type="button">Share</button>
   </div>
 
@@ -153,7 +245,9 @@
     <div id="shot-strip" class="shot-strip" hidden>
       <div class="shot-course">Business Innovation with Agentic AI and AI Agents · TGS-2023037472</div>
       <div class="shot-title" id="shot-title"></div>
+      <div class="shot-group" id="shot-group"></div>
       <div class="shot-meta" id="shot-meta"></div>
+      <div class="shot-note">Discuss and build it together on your group board. For the PP, every member pastes the group board screenshot and writes their own answers.</div>
     </div>
     <main id="board" class="board" aria-label="Activity board"></main>
   </div>
@@ -170,46 +264,6 @@
   <button id="btn-pdf" class="btn btn-primary btn-sm" type="button">Download PDF</button>
   <button id="btn-print" class="btn btn-sm" type="button">Print</button>
   <button id="btn-shot-exit" class="btn btn-ink btn-sm" type="button">Exit</button>
-</div>
-
-<!-- ================= AI SIMULATOR DRAWER ================= -->
-<div id="sim" class="drawer" hidden>
-  <div class="drawer-backdrop" data-close-sim></div>
-  <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="sim-h">
-    <header class="drawer-head">
-      <div>
-        <div class="kicker">Optional · your own API key</div>
-        <h3 id="sim-h">Simulate with AI</h3>
-      </div>
-      <button class="icon-btn" data-close-sim type="button" aria-label="Close simulator">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </header>
-    <div class="drawer-body">
-      <div class="keybox" data-keybox></div>
-
-      <label class="field">
-        <span>Sample business</span>
-        <select id="sim-business"></select>
-      </label>
-      <div id="sim-profile" class="biz-card"></div>
-
-      <div class="sim-actions">
-        <button class="act-btn" data-sim="dormant" type="button"></button>
-        <div class="act-suggest">
-          <label class="field field-tight">
-            <span>Block</span>
-            <select id="sim-block"></select>
-          </label>
-          <button class="act-btn" data-sim="suggest" type="button"></button>
-        </div>
-        <button class="act-btn" data-sim="simulate" type="button"></button>
-        <button class="act-btn" data-sim="stakeholders" type="button"></button>
-      </div>
-
-      <div id="sim-out" class="sim-out" aria-live="polite"></div>
-    </div>
-  </aside>
 </div>
 
 <!-- ================= MODALS ================= -->
@@ -275,7 +329,7 @@
           <option value="Question"></option>
           <option value="Action"></option>
           <option value="Example"></option>
-          <option value="AI"></option>
+          <option value="Muse"></option>
         </datalist>
       </label>
       <div class="row-2">
@@ -303,6 +357,47 @@
         <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </form>
+  </div>
+</div>
+
+<div id="muse-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="muse-modal-h">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel modal-lg">
+    <header class="modal-head">
+      <h3 id="muse-modal-h">Paste Muse's answer</h3>
+      <button class="icon-btn" aria-label="Close" data-close type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+    <div class="modal-body">
+      <p class="caption">Paste Muse's whole numbered reply. The board finds the answers for each block; you tick the ones to keep. Nothing is added until you press <b>Add</b>.</p>
+      <details class="muse-prompt-box">
+        <summary>Need the prompt again?</summary>
+        <textarea id="muse-prompt-text" rows="6" readonly></textarea>
+      </details>
+      <label class="field">
+        <span>Muse's reply</span>
+        <textarea id="muse-input" rows="8" placeholder="1. Data &amp; System Partners&#10;- ServiceNow holds every ticket since 2019&#10;- ..."></textarea>
+      </label>
+      <div class="modal-actions modal-actions-flat">
+        <button id="muse-parse" class="btn btn-primary" type="button">Find the answers</button>
+        <span class="spacer"></span>
+        <span id="muse-count" class="caption"></span>
+      </div>
+      <div id="muse-preview" class="muse-preview"></div>
+      <div id="muse-unmatched-wrap" hidden>
+        <label class="field">
+          <span>Not matched to a block: copy what you need by hand</span>
+          <textarea id="muse-unmatched" rows="5" readonly></textarea>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <span class="caption">Added notes are tagged <b>Muse</b>.</span>
+        <span class="spacer"></span>
+        <button type="button" class="btn" data-close>Cancel</button>
+        <button id="muse-add" type="button" class="btn btn-primary" disabled>Add selected</button>
+      </div>
+    </div>
   </div>
 </div>
 
