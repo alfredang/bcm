@@ -10,86 +10,86 @@ export const TEMPLATES = [
   "lo": "LO1",
   "codes": "K1, K2, A1, A2",
   "layout": "bmc",
-  "title": "Agentic AI Business Canvas",
+  "title": "Business Model Canvas for AI Agents",
   "short": "Find the opportunities",
-  "pitch": "Nine blocks, one question: where can agents earn their keep in your business?",
-  "musePrompt": "Act as my innovation consultant. Our organisation: [your organisation in two sentences: industry, size, customers, this year's objective]. Draft our Agentic AI Business Canvas with these 9 blocks:\n1. Data & System Partners: Who holds the data and systems the agents need?\n2. Processes to Augment: Which processes eat the most time, rework or waiting?\n3. Dormant Data & Know-how: What data and tacit knowledge sits unused today?\n4. Agentic AI Opportunities: What could an AI agent or agentic workflow do here?\n5. Human DRIs & Agent Roles: Who is the one person accountable for each agent's results?\n6. Channels & Touchpoints: Where do the agents meet customers and staff?\n7. Stakeholders & Pain Points: Who feels the pain today, and who will feel the change?\n8. Costs & Risks: What will it cost, and what could go wrong?\n9. Value & Objectives Fit: Which business objective does each opportunity move, and by how much?\n\nRules: two specific notes per block, at most 15 words each, with names, numbers and owners. Use my email and calendar only where relevant and name the source. Mark guesses as (assumption).\nReply ONLY in this format, so I can paste it into our board:\n1. Data & System Partners\n- first note\n- second note\n2. Processes to Augment\n- first note\n- second note\n(continue to block 9). End with: Verify first: the three notes I should check.",
+  "pitch": "The classic nine-block canvas, re-asked for one question: where can AI agents create value in this business?",
+  "musePrompt": "Act as my innovation consultant. Our organisation: [your organisation in two sentences: industry, size, customers, this year's objective]. Draft our Business Model Canvas for AI Agents with these 9 blocks:\n1. Key Partners: Which partners hold the data, systems or AI platforms your agents need?\n2. Key Activities: Which key activities could AI agents do, speed up or watch over?\n3. Key Resources: Which data and know-how would make your agents smart about your business?\n4. Value Propositions: What new or better value can AI agents deliver to your customers?\n5. Customer Relationships: How will agents change the way you serve and keep customers, and where must a human stay?\n6. Channels: Through which channels will your agents meet customers?\n7. Customer Segments: Which customer segments gain most from AI agents, and which still want a person?\n8. Cost Structure: What will the agents cost, and which costs will they remove or add?\n9. Revenue Streams: How will the agents grow revenue or protect it, and which objective do they serve?\n\nRules: two specific notes per block, at most 15 words each, with names, numbers and owners. Use my email and calendar only where relevant and name the source. Mark guesses as (assumption).\nReply ONLY in this format, so I can paste it into our board:\n1. Key Partners\n- first note\n- second note\n2. Key Activities\n- first note\n- second note\n(continue to block 9). End with: Verify first: the three notes I should check.",
   "evidence": "PP Task 1 · screenshot of your completed canvas",
   "discuss": [
-   "Which of the five capability gaps (private data, internal language, live context, action, guardrails) blocks each idea?",
+   "Which block of your business model would an AI agent change the most?",
    "Which opportunity moves a number your leadership already tracks?",
-   "Which idea would you stop first if the data turned out to be poor?"
+   "Which of the five capability gaps (private data, internal language, live context, action, guardrails) could stop it?"
   ],
-  "minutes": 45,
+  "minutes": 110,
   "blocks": [
    {
     "id": "keyPartners",
     "num": 1,
-    "title": "Data & System Partners",
-    "prompt": "Who holds the data and systems the agents need?",
+    "title": "Key Partners",
+    "prompt": "Which partners hold the data, systems or AI platforms your agents need?",
     "questions": [
-     "Which vendors, platforms or partners own the systems (CRM, ERP, Gmail, WhatsApp)?",
-     "Who must agree before an agent reads or writes there?",
-     "Which partner could co-develop or host the agent?"
+     "Which vendors own the systems agents must read or act in (CRM, ERP, Gmail, WhatsApp)?",
+     "Which AI platform or agent partner would you buy from or build with?",
+     "Who must agree before an agent touches their data?"
     ],
     "example": [
      {
-      "title": "Ticketing vendor (ServiceNow)",
-      "description": "Holds every service request since 2019; API access needs a contract addendum."
+      "title": "ServiceNow (ticketing vendor)",
+      "description": "Holds every service request since 2019; agent API access needs a contract addendum."
      },
      {
-      "title": "Google Workspace",
-      "description": "Gmail and Calendar for 140 staff; connectors approved by IT."
+      "title": "Meta Muse / Google Workspace",
+      "description": "Always-on agent reads Gmail and Calendar for 140 staff."
      },
      {
       "title": "Building owners",
-      "description": "Share BMS sensor feeds for 30 managed sites."
+      "description": "Share sensor feeds an agent can watch for faults."
      }
     ]
    },
    {
     "id": "keyActivities",
     "num": 2,
-    "title": "Processes to Augment",
-    "prompt": "Which processes eat the most time, rework or waiting?",
+    "title": "Key Activities",
+    "prompt": "Which key activities could AI agents do, speed up or watch over?",
     "questions": [
-     "Where do requests queue, bounce or get re-keyed?",
-     "Which steps follow clear rules; which need judgement?",
-     "What does Step 1 (mine the process) tell you?"
+     "Which activities are repetitive, rule-based or full of waiting?",
+     "Which need judgement and must stay human?",
+     "Which could an always-on agent watch 24/7?"
     ],
     "example": [
      {
-      "title": "Request triage",
-      "description": "Coordinators read 80 emails and WhatsApps a day and re-key them into tickets."
+      "title": "Request triage (agent)",
+      "description": "Agent reads 80 emails and WhatsApps a day, drafts tickets; coordinators approve."
      },
      {
       "title": "Technician scheduling",
-      "description": "Done by phone each morning; 1 in 7 jobs needs a second visit."
+      "description": "Agent proposes routes; supervisor confirms."
      },
      {
       "title": "Monthly client reports",
-      "description": "Two days of copy-paste from tickets into PowerPoint."
+      "description": "Agent drafts from tickets; account manager reviews."
      }
     ]
    },
    {
     "id": "keyResources",
     "num": 3,
-    "title": "Dormant Data & Know-how",
-    "prompt": "What data and tacit knowledge sits unused today?",
+    "title": "Key Resources",
+    "prompt": "Which data and know-how would make your agents smart about your business?",
     "questions": [
-     "Which calls, chats, emails, photos or logs are never analysed?",
-     "What do your veterans know that is written nowhere?",
-     "Is the data clean, current and permitted for this use?"
+     "Which dormant data (calls, chats, tickets, logs) is never analysed?",
+     "What do veterans know that is written nowhere?",
+     "Is the data clean, current and permitted?"
     ],
     "example": [
      {
       "title": "5 years of closed tickets",
-      "description": "Root causes, parts used and repeat faults per site."
+      "description": "Root causes and repeat faults per site: fuel for a predictor agent."
      },
      {
-      "title": "Technician photos & voice notes",
-      "description": "Thousands of job-site photos in WhatsApp groups."
+      "title": "Technician photos and voice notes",
+      "description": "Thousands in WhatsApp groups, never searched."
      },
      {
       "title": "Senior coordinator know-how",
@@ -100,71 +100,71 @@ export const TEMPLATES = [
    {
     "id": "valueProps",
     "num": 4,
-    "title": "Agentic AI Opportunities",
-    "prompt": "What could an AI agent or agentic workflow do here?",
+    "title": "Value Propositions",
+    "prompt": "What new or better value can AI agents deliver to your customers?",
     "questions": [
-     "Name the agent and its job in one line.",
-     "Assistant, workflow, single agent or multi-agent?",
-     "Always-on (watching) or on-demand?"
+     "Name the agent and the customer benefit in one line.",
+     "Faster, cheaper, more personal or entirely new?",
+     "Always-on (watching) or on demand?"
     ],
     "example": [
      {
-      "title": "Triage agent (always-on)",
-      "description": "Reads every inbound email/WhatsApp, drafts the ticket, routes it; coordinator approves."
+      "title": "Same-day answers, 24/7",
+      "description": "Always-on triage agent replies within minutes, even at 2 am."
      },
      {
-      "title": "Repeat-fault predictor",
-      "description": "Flags sites likely to fail again within 30 days from ticket history."
+      "title": "No repeat faults",
+      "description": "Predictor agent flags sites likely to fail again within 30 days."
      },
      {
-      "title": "Client report agent",
-      "description": "Builds the monthly report from tickets; account manager reviews."
+      "title": "Live job status",
+      "description": "Agent updates the client portal as work progresses."
      }
     ]
    },
    {
     "id": "customerRel",
     "num": 5,
-    "title": "Human DRIs & Agent Roles",
-    "prompt": "Who is the one person accountable for each agent's results?",
+    "title": "Customer Relationships",
+    "prompt": "How will agents change the way you serve and keep customers, and where must a human stay?",
     "questions": [
-     "Name one DRI per opportunity.",
-     "What does the agent do; what does the human decide?",
-     "Where must a person approve before anything leaves the building?"
+     "Which interactions can an agent handle; which need a person?",
+     "Who is the DRI accountable for the agent's results?",
+     "How does a customer reach a human fast?"
     ],
     "example": [
      {
+      "title": "Agent first, human always reachable",
+      "description": "Routine updates by agent; complaints and refunds by a coordinator."
+     },
+     {
       "title": "DRI: Head of Service Desk",
-      "description": "Owns triage accuracy and response time; approves routing rules."
+      "description": "Owns triage accuracy and response time."
      },
      {
-      "title": "Coordinators",
-      "description": "Approve every drafted reply to a client; handle complaints personally."
-     },
-     {
-      "title": "Agent never decides",
-      "description": "Refunds over SGD 200, legal complaints, safety incidents."
+      "title": "Personal touch kept",
+      "description": "Account managers call key clients monthly."
      }
     ]
    },
    {
     "id": "channels",
     "num": 6,
-    "title": "Channels & Touchpoints",
-    "prompt": "Where do the agents meet customers and staff?",
+    "title": "Channels",
+    "prompt": "Through which channels will your agents meet customers?",
     "questions": [
-     "Which channels does the agent read and write in?",
-     "Read-only or read-and-act?",
-     "How does a customer reach a human fast?"
+     "Email, WhatsApp, web chat, portal, phone?",
+     "Read-only, draft or act in each channel?",
+     "Which channel goes first?"
     ],
     "example": [
      {
       "title": "Email + WhatsApp Business",
-      "description": "Inbound requests; agent drafts, human sends at first."
+      "description": "Agent drafts every reply; coordinator sends at first."
      },
      {
       "title": "Client portal",
-      "description": "Live job status updated by the agent."
+      "description": "Agent posts live job status."
      },
      {
       "title": "Teams channel",
@@ -175,37 +175,37 @@ export const TEMPLATES = [
    {
     "id": "customerSeg",
     "num": 7,
-    "title": "Stakeholders & Pain Points",
-    "prompt": "Who feels the pain today, and who will feel the change?",
+    "title": "Customer Segments",
+    "prompt": "Which customer segments gain most from AI agents, and which still want a person?",
     "questions": [
-     "Which customers, staff and managers are affected?",
-     "What is each group's biggest frustration?",
-     "Who might resist, and why?"
+     "Which segment has the biggest pain an agent can fix?",
+     "Which segment will resist an agent?",
+     "Any new segment agents let you serve?"
     ],
     "example": [
      {
       "title": "Building managers (clients)",
-      "description": "Chase job status by phone; want same-day answers."
+      "description": "Want same-day answers; happy with an agent for status updates."
      },
      {
-      "title": "Coordinators",
-      "description": "Overloaded at 9-11 am; fear the agent replaces them."
+      "title": "Premium contracts",
+      "description": "Expect a named human: agent supports, person serves."
      },
      {
-      "title": "Finance",
-      "description": "Wants fewer disputed invoices from incomplete job sheets."
+      "title": "Small offices (new)",
+      "description": "Low-cost, agent-led service tier becomes viable."
      }
     ]
    },
    {
     "id": "costStructure",
     "num": 8,
-    "title": "Costs & Risks",
-    "prompt": "What will it cost, and what could go wrong?",
+    "title": "Cost Structure",
+    "prompt": "What will the agents cost, and which costs will they remove or add?",
     "questions": [
-     "Licences, integration, change and assurance costs?",
-     "Which of the five capability gaps is the biggest risk?",
-     "PDPA, security or reputational exposure?"
+     "Licences, integration, change, assurance costs?",
+     "Which costs fall (labour hours, rework)?",
+     "New risks that carry a cost (PDPA, errors)?"
     ],
     "example": [
      {
@@ -213,37 +213,37 @@ export const TEMPLATES = [
       "description": "Licences 14k, integration 15k, training and change 10k."
      },
      {
-      "title": "Risk: wrong routing",
-      "description": "Mitigate with human approval for the first 90 days."
+      "title": "Cost removed",
+      "description": "38% of coordinator time spent re-keying."
      },
      {
-      "title": "PDPA",
-      "description": "Tenant names and phone numbers in tickets: mask before analysis."
+      "title": "Risk cost",
+      "description": "Human approval for 90 days to avoid misrouted urgent jobs."
      }
     ]
    },
    {
     "id": "revenueStreams",
     "num": 9,
-    "title": "Value & Objectives Fit",
-    "prompt": "Which business objective does each opportunity move, and by how much?",
+    "title": "Revenue Streams",
+    "prompt": "How will the agents grow revenue or protect it, and which objective do they serve?",
     "questions": [
-     "Revenue, cost, risk or experience: which lever?",
-     "Baseline today and target in 90 days?",
-     "Score: value x feasibility x data readiness (1-5 each)."
+     "New or premium service, more volume, fewer lost clients?",
+     "Baseline today, target in 90 days?",
+     "Score each opportunity: value x feasibility x data readiness (1-5)."
     ],
     "example": [
      {
-      "title": "Triage agent: score 5-4-4 = 80",
-      "description": "Handling time 18 -> 11 min; supports the 'same-day response' objective."
+      "title": "Premium '2-hour response' tier",
+      "description": "Agent makes the SLA affordable: +SGD 6k a month (assumption)."
      },
      {
-      "title": "Report agent: score 3-5-5 = 75",
-      "description": "Saves 2 account-manager days a month per client."
+      "title": "Fewer lost contracts",
+      "description": "Faster answers protect renewals; objective: same-day response."
      },
      {
-      "title": "Predictor: score 4-2-3 = 24",
-      "description": "Promising but data is messy: park for phase 2."
+      "title": "Scores",
+      "description": "Triage agent 5x4x4 = 80; report agent 75; predictor 24 (park it)."
      }
     ]
    }
@@ -266,7 +266,7 @@ export const TEMPLATES = [
    "What must be true at day 30 for you to keep going?",
    "Who is the DRI, and what decision rights do they hold?"
   ],
-  "minutes": 60,
+  "minutes": 155,
   "blocks": [
    {
     "id": "objective",
@@ -479,7 +479,7 @@ export const TEMPLATES = [
    "Which manager role becomes a DRI, a coach or a translator?",
    "How will staff send you new ideas once the agents are live?"
   ],
-  "minutes": 60,
+  "minutes": 120,
   "blocks": [
    {
     "id": "story",
