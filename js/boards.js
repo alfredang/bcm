@@ -50,7 +50,7 @@ export const BMC_TEMPLATE = {
     { id: "valueProps", num: 4, title: "Value Propositions", prompt: "Why customers choose you.",
       questions: ["What value do we deliver?", "Which customer problems do we solve?", "What makes the offer unique?"],
       example: [
-        { title: "One number for every fault", description: "Building managers call once; Meridian handles the rest." },
+        { title: "One number for every fault", description: "Building managers call once; we handle the rest." },
         { title: "2-hour urgent response", description: "Lift entrapments and leaks get a technician fast." }
       ] },
     { id: "customerRel", num: 5, title: "Customer Relationships", prompt: "How you engage and retain each segment.",

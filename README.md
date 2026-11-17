@@ -36,7 +36,7 @@ The activity content (block titles, prompts, guiding questions, discussion quest
 2. **Learners: join your group board.** Scan your group's QR code, or enter the Board ID on the landing page, then type your name. Everyone on the board edits live.
 3. **Draft with Meta Muse.** On the board, *Copy Muse prompt* copies the activity's prompt; *Open Meta Muse* opens <https://muse.ai/> in a new tab. Paste Muse's numbered reply into *Paste Muse answer*: the board matches each line to its block, shows a preview, and adds only the answers you tick (tagged `Muse`). Lines it can't match stay in the dialog for copying by hand.
 4. **Type your answers.** Every block has a *Type your answer…* box: Enter saves (Shift+Enter for a new line; the first line becomes the headline). The **+** button opens the full note editor (tag, priority, status). Notes can be voted on, edited and dragged to reorder.
-5. **Stuck?** *View example* shows how **Meridian Services Pte Ltd**, a fictional Singapore facilities firm, filled in each block, without writing anything. *Load worked example* copies those notes onto the board, tagged `Example`.
+5. **Stuck?** *View example* shows how a fictional sample company filled in each block, without writing anything. *Load worked example* copies those notes onto the board, tagged `Example`.
 6. **Hand it in.** *Screenshot view* hides the editing tools and adds a header strip with the course, activity, **group name**, the learner's own name, the organisation, the date and the PP task. From there: **Download PNG**, **Download PDF** (one landscape A4 page) or **Print**.
 
 ## Screenshots

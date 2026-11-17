@@ -286,7 +286,7 @@ export async function addNotes(blockId, notes, category) {
   catch (e) { console.error(e); showToast("Could not add the notes"); return false; }
 }
 
-/** Copy the template's worked example (Meridian Services) onto the board as "Example" notes. */
+/** Copy the template's worked example (fictional sample company) onto the board as "Example" notes. */
 export async function loadWorkedExample() {
   if (!template) return;
   const blocks = template.blocks.filter(b => (b.example || []).length);
