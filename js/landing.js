@@ -39,6 +39,7 @@ function renderCards() {
         ${t.codes ? `<span class="chip">${escapeHtml(t.codes)}</span>` : ""}
       </div>
       <button class="btn" type="button" data-start="${t.key}">Create a board</button>
+      ${t.num ? `<a class="demo-link" href="?join=meridian-activity-${t.num}">See Meridian's demo board &rarr;</a>` : ""}
     </article>`;
   };
   const el = document.getElementById("activity-cards");

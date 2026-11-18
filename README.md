@@ -30,6 +30,18 @@ The online activity tool for the WSQ course **Business Innovation with Agentic A
 
 The activity content (block titles, prompts, guiding questions, discussion questions, the Meta Muse prompt and the worked example) comes from the course build in [`js/templates.js`](js/templates.js). That file is generated; do not edit it by hand.
 
+## Meridian demo boards and sample website
+
+Meridian Services Pte Ltd is a **fictitious** facilities-maintenance company used as the worked example. Each activity has a finished demo board to refer to:
+
+| Activity | Demo board |
+|---|---|
+| 1 · Business Model Canvas for AI Agents | <https://alfredang.github.io/bcm/?join=meridian-activity-1> |
+| 2 · AI Agent 90-Day Action Plan | <https://alfredang.github.io/bcm/?join=meridian-activity-2> |
+| 3 · Sustain and Operate with AI Agents (SCALE) | <https://alfredang.github.io/bcm/?join=meridian-activity-3> |
+
+Bonus topic sample: the website for Meridian's new AI agent business, **Meridian Assist**, at <https://alfredang.github.io/bcm/meridian/>. Learners build their own with Codex and deploy it with Sites.
+
 ## How a class uses it
 
 1. **Create a board.** On the landing page type your name (a board title is optional) and press *Create Activity 1 / 2 / 3 board*. The board opens straight onto its QR code, Board ID and join link (`?join=<id>`).
