@@ -47,7 +47,7 @@ export function fillStrip() {
   groupEl.hidden = !groupEl.textContent;
   document.getElementById("shot-meta").innerHTML = [
     `Learner: <b>${esc(me)}</b>`,
-    others.length ? `Group members: <b>${esc(others.join(", "))}</b>` : "",
+    others.length ? `Also on this board: <b>${esc(others.join(", "))}</b>` : "",
     meta.group && meta.org ? `Organisation: <b>${esc(meta.org)}</b>` : "",
     `Date: <b>${esc(todayLabel())}</b>`,
     pp ? `Evidence for <b>${esc(pp)}</b>` : esc(t.evidence)

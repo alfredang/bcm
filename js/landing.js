@@ -38,7 +38,7 @@ function renderCards() {
         ${pp ? `<span class="chip chip-teal">${pp} evidence</span>` : `<span class="chip">${escapeHtml(t.evidence)}</span>`}
         ${t.codes ? `<span class="chip">${escapeHtml(t.codes)}</span>` : ""}
       </div>
-      <button class="btn" type="button" data-start="${t.key}">Create a group board</button>
+      <button class="btn" type="button" data-start="${t.key}">Create a board</button>
     </article>`;
   };
   const el = document.getElementById("activity-cards");
@@ -60,15 +60,20 @@ function renderMapTable() {
   }).join("");
 }
 
-function renderSelect() {
-  document.getElementById("create-type").innerHTML = CREATABLE_TEMPLATES.map(t =>
-    `<option value="${t.key}">${t.num ? `Activity ${t.num}: ` : ""}${escapeHtml(t.title)}</option>`
+// One plain button per activity: no dropdown (owner, v44: "make it as simple as possible").
+let preKey = "";
+function renderCreateButtons() {
+  const el = document.getElementById("create-btns");
+  el.innerHTML = CREATABLE_TEMPLATES.map(t =>
+    `<button class="btn btn-ink btn-block create-btn" type="button" data-type="${t.key}">Create ${t.num ? `Activity ${t.num}` : ""} board<span class="create-sub">${escapeHtml(t.title)}</span></button>`
   ).join("");
+  el.querySelectorAll(".create-btn").forEach(b => b.addEventListener("click", () => onCreate(b.dataset.type, b)));
 }
 
 function preselect(key, focus) {
   if (!hasTemplate(key)) return;
-  document.getElementById("create-type").value = key;
+  preKey = key;
+  document.querySelectorAll(".create-btn").forEach(b => b.classList.toggle("is-pre", b.dataset.type === key));
   const start = document.getElementById("start");
   start.scrollIntoView({ behavior: focus ? "smooth" : "auto", block: "center" });
   const target = document.getElementById("create-group");
@@ -85,27 +90,28 @@ export function initLanding() {
   renderSideNav();
   renderCards();
   renderMapTable();
-  renderSelect();
+  renderCreateButtons();
 
   const savedName = localStorage.getItem(NAME_KEY) || "";
   document.getElementById("create-name").value = savedName;
   document.getElementById("join-name").value = savedName;
 
-  document.getElementById("btn-create").addEventListener("click", onCreate);
   document.getElementById("btn-join").addEventListener("click", onJoin);
-  ["create-group", "create-org", "create-name"].forEach(id =>
-    document.getElementById(id).addEventListener("keydown", e => { if (e.key === "Enter") onCreate(); }));
+  ["create-group", "create-name"].forEach(id =>
+    document.getElementById(id).addEventListener("keydown", e => {
+      if (e.key !== "Enter") return;
+      if (preKey) onCreate(preKey, document.querySelector(`.create-btn[data-type="${preKey}"]`));
+      else showToast("Now press the button for your activity");
+    }));
   document.getElementById("join-name").addEventListener("keydown", e => { if (e.key === "Enter") onJoin(); });
   document.getElementById("join-id").addEventListener("keydown", e => { if (e.key === "Enter") onJoin(); });
 }
 
-async function onCreate() {
-  const btn = document.getElementById("btn-create");
-  const type = document.getElementById("create-type").value;
+async function onCreate(type, btn) {
   const name = document.getElementById("create-name").value.trim();
   const group = document.getElementById("create-group").value.trim();
-  const org = document.getElementById("create-org").value.trim();
-  if (!group) { document.getElementById("create-group").focus(); return showToast("Enter a group name: it becomes the board title"); }
+  const org = "";
+  const title = group || "Board";   // group name is optional (owner: "just form a board")
   if (!name) { document.getElementById("create-name").focus(); return showToast("Enter your name to continue"); }
   localStorage.setItem(NAME_KEY, name);
 
@@ -114,8 +120,8 @@ async function onCreate() {
     btn.disabled = true;
     try {
       await setDoc(doc(db, "canvases", id), {
-        title: group,
-        group,
+        title,
+        group: title,
         org,
         type,
         ownerName: name,
@@ -130,6 +136,7 @@ async function onCreate() {
       btn.disabled = false;
     }
   }
+  try { sessionStorage.setItem("bcm.showShare", id); } catch {}   // open the QR + Board ID as soon as the board loads
   openBoard(id);
 }
 

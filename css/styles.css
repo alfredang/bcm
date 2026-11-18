@@ -585,3 +585,9 @@ body.shot .capture { min-width: 1100px; }
 .prompts-cta:hover{background:#21201C}
 .prompts-cta .pc-k{display:block;font-family:Cambria,Georgia,serif;font-weight:700;font-size:1.25rem;color:#F2B49B}
 .prompts-cta .pc-t{display:block;color:#E8E5DE;margin-top:2px}
+
+/* v44: one create button per activity (no dropdown) */
+.create-btns { display: grid; gap: 10px; margin-top: 6px; }
+.create-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; line-height: 1.25; }
+.create-btn .create-sub { font-weight: 400; font-size: 0.86em; opacity: 0.8; }
+.create-btn.is-pre { outline: 3px solid var(--accent, #D97757); outline-offset: 2px; }

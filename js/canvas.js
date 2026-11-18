@@ -102,7 +102,7 @@ function renderMeta() {
   const groupInput = document.getElementById("board-group");
   if (document.activeElement !== groupInput) groupInput.value = meta.group || "";
   const names = learnerNames();
-  document.getElementById("chip-learners").textContent = names.length ? `Group members: ${names.join(", ")}` : "Group members: —";
+  document.getElementById("chip-learners").textContent = names.length ? `On this board: ${names.join(", ")}` : "On this board: —";
   document.title = `${meta.group || meta.org || "Board"} · ${t.title}`;
 }
 
@@ -273,6 +273,13 @@ export async function openCanvas(canvasId) {
   resetExampleView();
 
   mountNotes(canvasId, currentTemplate);
+  // A board just created on the landing page opens straight onto Share: QR code + Board ID for the group.
+  try {
+    if (sessionStorage.getItem("bcm.showShare") === canvasId) {
+      sessionStorage.removeItem("bcm.showShare");
+      setTimeout(() => openShareModal(canvasId), 300);
+    }
+  } catch {}
   if (!isConfigured) return;
 
   const ref = doc(db, "canvases", canvasId);

@@ -24,8 +24,7 @@
       <h4>Class activities</h4>
       <div id="side-activities"></div>
       <h4>More</h4>
-      <a href="#join">Join your group board</a>
-      <a href="#/trainer">Trainer: create group boards</a>
+      <a href="#join">Join a board</a>
       <a href="prompts.html">Meta Muse prompt templates</a>
     </nav>
 
@@ -37,54 +36,44 @@
   <main class="main">
     <div class="kicker">TGS-2023037472 · Tertiary Infotech Academy</div>
     <h1 id="landing-h1">One board per learning outcome, one screenshot per PP task</h1>
-    <p class="lead">Your group builds each activity together on one shared board. Join with the Board ID or QR code from your trainer, type your answers straight into each block, then screenshot the finished board into your Practical Performance. No login: just your name.</p>
+    <p class="lead">Create a board, show its QR code, and everyone joins and types into the same board. Screenshot the finished board into your Practical Performance. No login: just your name.</p>
 
     <a class="prompts-cta" href="prompts.html">
       <span class="pc-k">Meta Muse prompt templates</span>
-      <span class="pc-t">Fill in the blanks, copy the prompt, paste Muse's answer into your group board &#8594;</span>
+      <span class="pc-t">Fill in the blanks, copy the prompt, paste Muse's answer into your board &#8594;</span>
     </a>
 
     <div class="start-row">
       <section id="join" class="panel join-panel">
-        <div class="kicker">Learners start here</div>
-        <h3>Join your group board</h3>
-        <p class="caption">Scan the QR code your trainer shows, or paste the Board ID or join link.</p>
+        <h3>Join a board</h3>
+        <p class="caption">Scan the board's QR code, or type its Board ID.</p>
         <label class="field">
-          <span>Board ID or join link</span>
+          <span>Board ID</span>
           <input id="join-id" type="text" placeholder="e.g. bright-otter-1234" autocomplete="off" />
         </label>
         <label class="field">
           <span>Your name</span>
           <input id="join-name" type="text" placeholder="e.g. Tan Wei Ling" autocomplete="name" maxlength="60" />
         </label>
-        <button id="btn-join" class="btn btn-primary btn-block" type="button">Join group board</button>
+        <button id="btn-join" class="btn btn-primary btn-block" type="button">Join board</button>
       </section>
 
       <section id="start" class="panel create-panel">
-        <div class="kicker teal">Group leader or trainer</div>
-        <h3>Create a group board</h3>
+        <h3>Create a board</h3>
         <label class="field">
-          <span>Activity</span>
-          <select id="create-type"></select>
-        </label>
-        <label class="field">
-          <span>Group name (the board title)</span>
-          <input id="create-group" type="text" placeholder="e.g. Group 3 · your company name" maxlength="60" />
-        </label>
-        <label class="field">
-          <span>Organisation</span>
-          <input id="create-org" type="text" placeholder="e.g. your organisation's name" maxlength="80" />
+          <span>Board title <em class="optional">(optional)</em></span>
+          <input id="create-group" type="text" placeholder="e.g. Table 3" maxlength="60" />
         </label>
         <label class="field">
           <span>Your name</span>
           <input id="create-name" type="text" placeholder="e.g. Tan Wei Ling" autocomplete="name" maxlength="60" />
         </label>
-        <button id="btn-create" class="btn btn-ink btn-block" type="button">Create group board</button>
-        <p class="caption">Then press <b>Share</b> on the board to show your group the QR code.</p>
+        <div id="create-btns" class="create-btns"></div>
+        <p class="caption">The board opens with its QR code and Board ID. Everyone scans the code or types the Board ID under <b>Join a board</b>.</p>
       </section>
     </div>
 
-    <p class="pp-hint">Discuss and build it together on your group board. For the PP, every member pastes the group board screenshot and writes their own answers.</p>
+    <p class="pp-hint">Build it together on one board. For the PP, everyone pastes the board screenshot and writes their own answers.</p>
 
     <div class="callout">
       <strong>Stuck on a blank block?</strong> Press <b>View example</b> on any board to see how a fictional sample company filled it in, then write your own.
@@ -93,14 +82,6 @@
     <h2>The activities</h2>
     <div id="activity-cards" class="act-grid"></div>
 
-    <section class="panel trainer-panel">
-      <div>
-        <div class="kicker">Trainer</div>
-        <h3>Create group boards for the whole class</h3>
-        <p class="caption">Pick an activity and the number of groups (1-10). You get one printable page with every group's Board ID, join link and QR code.</p>
-      </div>
-      <a class="btn btn-ink" href="#/trainer">Create group boards</a>
-    </section>
 
     <h2>Where each screenshot goes</h2>
     <div class="table-wrap">
@@ -203,8 +184,8 @@
       <div id="board-kicker" class="kicker"></div>
       <h1 id="board-title"></h1>
       <div class="org-row group-row">
-        <label for="board-group" class="org-label">Group</label>
-        <input id="board-group" class="org-input group-input" type="text" maxlength="60" placeholder="Add your group name" aria-label="Group name (board title)" />
+        <label for="board-group" class="org-label">Title</label>
+        <input id="board-group" class="org-input group-input" type="text" maxlength="60" placeholder="Add a board title" aria-label="Board title (board title)" />
       </div>
       <div class="org-row">
         <label for="board-org" class="org-label">Organisation</label>
@@ -254,7 +235,7 @@
       <div class="shot-title" id="shot-title"></div>
       <div class="shot-group" id="shot-group"></div>
       <div class="shot-meta" id="shot-meta"></div>
-      <div class="shot-note">Discuss and build it together on your group board. For the PP, every member pastes the group board screenshot and writes their own answers.</div>
+      <div class="shot-note">Build it together on one board. For the PP, everyone pastes the board screenshot and writes their own answers.</div>
     </div>
     <main id="board" class="board" aria-label="Activity board"></main>
   </div>
